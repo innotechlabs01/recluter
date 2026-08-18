@@ -1,21 +1,162 @@
 {
-  "app": {
-    "name": "Recluter"
-  },
   "common": {
+    "appName": "Recluter",
     "loading": "Loading...",
-    "error": "An error occurred",
     "save": "Save",
     "cancel": "Cancel",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "noResults": "No results found",
+    "error": "An error occurred",
     "delete": "Delete",
-    "edit": "Edit",
-    "search": "Search"
+    "edit": "Edit"
   },
   "nav": {
     "home": "Home",
+    "howItWorks": "How It Works",
+    "benefits": "Benefits",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "login": "Login",
+    "requestPersonnel": "Request Personnel",
     "dashboard": "Dashboard",
     "jobs": "Jobs",
     "candidates": "Candidates",
     "settings": "Settings"
+  },
+  "landing": {
+    "hero": {
+      "title": "We find the perfect talent for your company in Colombia",
+      "subtitle": "We connect US companies with qualified Colombian professionals. Transparent, fast process with no risk until you hire.",
+      "cta": "Request Personnel",
+      "secondary": "How it works"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "subtitle": "In 4 simple steps you get the talent you need",
+      "step1": {
+        "title": "Create your request",
+        "description": "Complete the wizard with the position requirements"
+      },
+      "step2": {
+        "title": "We search",
+        "description": "Our recruitment team searches for candidates"
+      },
+      "step3": {
+        "title": "Receive candidates",
+        "description": "Evaluate profiles and CVs of pre-selected candidates"
+      },
+      "step4": {
+        "title": "Hire the best",
+        "description": "Choose and hire the ideal candidate for your company"
+      }
+    },
+    "benefits": {
+      "title": "Why choose us?",
+      "subtitle": "Advantages of working with our recruitment team",
+      "items": [
+        {
+          "title": "Verified talent",
+          "description": "Pre-selected and evaluated candidates by our team"
+        },
+        {
+          "title": "Transparent process",
+          "description": "Real-time tracking of every step of the process"
+        },
+        {
+          "title": "No risk",
+          "description": "We only charge when you hire the candidate"
+        },
+        {
+          "title": "Colombian talent",
+          "description": "Highly qualified professionals in Latin America"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "q": "How long does it take to find candidates?",
+          "a": "The average time is 2-4 weeks depending on the complexity of the position."
+        },
+        {
+          "q": "How much does the service cost?",
+          "a": "We work with commission per successful hire. We only charge when you hire the candidate."
+        },
+        {
+          "q": "How does hiring talent in Colombia work?",
+          "a": "We handle the search, pre-selection and evaluation. You just choose and hire."
+        },
+        {
+          "q": "Can I cancel if I'm not satisfied?",
+          "a": "Yes, you can cancel at any time. We only charge if you hire."
+        }
+      ]
+    },
+    "payment": {
+      "title": "Payment Terms",
+      "subtitle": "Transparent business model with no surprises",
+      "model": "Commission per successful hire",
+      "description": "Our model is simple: we only charge when you hire the candidate. No fixed costs, no surprises.",
+      "methods": "Accepted payment methods:",
+      "bank": "Bank transfer",
+      "paypal": "PayPal"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Have questions? Write to us",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send message"
+    }
+  },
+  "auth": {
+    "roleSelection": {
+      "title": "How do you want to use the platform?",
+      "company": "I'm a company",
+      "companyDesc": "I need to hire personnel",
+      "candidate": "I'm looking for job opportunities",
+      "candidateDesc": "I want to find a job"
+    }
+  },
+  "empresa": {
+    "dashboard": {
+      "welcome": "Welcome",
+      "subtitle": "Summary of your recruitment processes",
+      "activeProcesses": "Active processes",
+      "candidatesReceived": "Candidates received",
+      "pendingInterviews": "Pending interviews",
+      "searchPersonnel": "Search personnel",
+      "activeProcessesList": "Active processes"
+    },
+    "wizard": {
+      "title": "New personnel request",
+      "step1": "Company",
+      "step2": "Position",
+      "step3": "Profile",
+      "step4": "Conditions",
+      "step5": "Process",
+      "step6": "Summary",
+      "companyInfo": "Company information",
+      "companySubtitle": "Basic company data for the request",
+      "position": "Required position",
+      "profile": "Candidate profile",
+      "conditions": "Employment conditions",
+      "selection": "Selection process",
+      "review": "Review and confirmation",
+      "fields": {
+        "companyName": "Company name *",
+        "industry": "Industry *",
+        "location": "Location *",
+        "contactName": "Contact person *",
+        "contactRole": "Role *",
+        "contactEmail": "Corporate email *"
+      }
+    }
   }
 }

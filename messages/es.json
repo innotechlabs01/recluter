@@ -1,21 +1,162 @@
 {
-  "app": {
-    "name": "Recluter"
-  },
   "common": {
+    "appName": "Recluter",
     "loading": "Cargando...",
-    "error": "Ocurrió un error",
     "save": "Guardar",
     "cancel": "Cancelar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "submit": "Enviar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "noResults": "No se encontraron resultados",
+    "error": "Ocurrió un error",
     "delete": "Eliminar",
-    "edit": "Editar",
-    "search": "Buscar"
+    "edit": "Editar"
   },
   "nav": {
     "home": "Inicio",
+    "howItWorks": "Cómo Funciona",
+    "benefits": "Beneficios",
+    "faq": "FAQ",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "requestPersonnel": "Solicitar personal",
     "dashboard": "Panel",
     "jobs": "Empleos",
     "candidates": "Candidatos",
     "settings": "Configuración"
+  },
+  "landing": {
+    "hero": {
+      "title": "Encontramos el talento perfecto para tu empresa en Colombia",
+      "subtitle": "Conectamos empresas de Estados Unidos con profesionales calificados colombianos. Proceso transparente, rápido y sin riesgo hasta contratar.",
+      "cta": "Solicitar personal",
+      "secondary": "Cómo funciona"
+    },
+    "howItWorks": {
+      "title": "Cómo Funciona",
+      "subtitle": "En 4 simples pasos tenés al talento que necesitás",
+      "step1": {
+        "title": "Creás tu solicitud",
+        "description": "Completá el wizard con los requisitos del puesto"
+      },
+      "step2": {
+        "title": "Nosotros buscamos",
+        "description": "Nuestro equipo de reclutamiento busca candidatos"
+      },
+      "step3": {
+        "title": "Recibís candidatos",
+        "description": "Evaluá perfiles y CVs de candidatos preseleccionados"
+      },
+      "step4": {
+        "title": "Contratás al mejor",
+        "description": "Elegí y contratá al candidato ideal para tu empresa"
+      }
+    },
+    "benefits": {
+      "title": "¿Por qué elegirnos?",
+      "subtitle": "Ventajas de trabajar con nuestro equipo de reclutamiento",
+      "items": [
+        {
+          "title": "Talento verificado",
+          "description": "Candidatos preseleccionados y evaluados por nuestro equipo"
+        },
+        {
+          "title": "Proceso transparente",
+          "description": "Seguimiento en tiempo real de cada paso del proceso"
+        },
+        {
+          "title": "Sin riesgo",
+          "description": "Solo cobramos cuando contratás al candidato"
+        },
+        {
+          "title": "Talento colombiano",
+          "description": "Profesionales altamente calificados en Latinoamérica"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "items": [
+        {
+          "q": "¿Cuánto tiempo toma encontrar candidatos?",
+          "a": "El tiempo promedio es de 2-4 semanas dependiendo de la complejidad del puesto."
+        },
+        {
+          "q": "¿Cuánto cuesta el servicio?",
+          "a": "Trabajamos con comisión por contratación exitosa. Solo cobramos cuando contratás al candidato."
+        },
+        {
+          "q": "¿Cómo funciona la contratación con talento en Colombia?",
+          "a": "Nos encargamos de la búsqueda, preselección y evaluación. Vos solo elegís y contratás."
+        },
+        {
+          "q": "¿Puedo cancelar si no estoy satisfecho?",
+          "a": "Sí, podés cancelar en cualquier momento. Solo cobramos si contratás."
+        }
+      ]
+    },
+    "payment": {
+      "title": "Condiciones de Pago",
+      "subtitle": "Modelo de negocio transparente y sin sorpresas",
+      "model": "Comisión por contratación exitosa",
+      "description": "Nuestro modelo es simple: solo cobramos cuando contratás al candidato. Sin costos fijos, sin sorpresas.",
+      "methods": "Medios de pago aceptados:",
+      "bank": "Transferencia bancaria",
+      "paypal": "PayPal"
+    },
+    "contact": {
+      "title": "Contacto",
+      "subtitle": "¿Tenés preguntas? Escribinos",
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje",
+      "send": "Enviar mensaje"
+    }
+  },
+  "auth": {
+    "roleSelection": {
+      "title": "¿Cómo querés usar la plataforma?",
+      "company": "Soy empresa",
+      "companyDesc": "Necesito contratar personal",
+      "candidate": "Busco oportunidades laborales",
+      "candidateDesc": "Quiero encontrar trabajo"
+    }
+  },
+  "empresa": {
+    "dashboard": {
+      "welcome": "Bienvenido",
+      "subtitle": "Resumen de tus procesos de reclutamiento",
+      "activeProcesses": "Procesos activos",
+      "candidatesReceived": "Candidatos recibidos",
+      "pendingInterviews": "Entrevistas pendientes",
+      "searchPersonnel": "Buscar personal",
+      "activeProcessesList": "Procesos activos"
+    },
+    "wizard": {
+      "title": "Nueva solicitud de personal",
+      "step1": "Empresa",
+      "step2": "Posición",
+      "step3": "Perfil",
+      "step4": "Condiciones",
+      "step5": "Proceso",
+      "step6": "Resumen",
+      "companyInfo": "Información de la empresa",
+      "companySubtitle": "Datos básicos de la empresa para la solicitud",
+      "position": "Posición requerida",
+      "profile": "Perfil del candidato",
+      "conditions": "Condiciones laborales",
+      "selection": "Proceso de selección",
+      "review": "Revisión y confirmación",
+      "fields": {
+        "companyName": "Nombre de la empresa *",
+        "industry": "Industria *",
+        "location": "Ubicación *",
+        "contactName": "Persona de contacto *",
+        "contactRole": "Cargo *",
+        "contactEmail": "Email corporativo *"
+      }
+    }
   }
 }
