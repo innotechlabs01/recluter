@@ -1,0 +1,4323 @@
+{
+  "version": "0.8.4",
+  "name": "OpenPencil CLI Session",
+  "themes": {
+    "Mode": [
+      "Light",
+      "Dark"
+    ]
+  },
+  "variables": {
+    "--accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#f5f5f5"
+        },
+        {
+          "value": "#262626",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1f2937",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1e293b",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#292524",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#27272a",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--accent-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#171717"
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--background": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#0a0a0a",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#030712",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#020617",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#0c0a09",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#09090b",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--black": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "--border": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#e5e5e5"
+        },
+        {
+          "value": "#e5e7eb",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#e2e8f0",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#e5e5e5",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#e4e4e7",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#ffffff1a",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--card": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#171717",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--card-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0a0a0a"
+        },
+        {
+          "value": "#030712",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#020617",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#0c0a09",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#09090b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--destructive": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#e7000b"
+        },
+        {
+          "value": "#ff666999",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0a0a0a"
+        },
+        {
+          "value": "#030712",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#020617",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#0c0a09",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#09090b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--input": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#e5e5e5"
+        },
+        {
+          "value": "#e5e7eb",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#e2e8f0",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#e5e5e5",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#e4e4e7",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#ffffff1a",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--muted": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#f5f5f5"
+        },
+        {
+          "value": "#262626",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1f2937",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1e293b",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#292524",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#27272a",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--muted-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#737373"
+        },
+        {
+          "value": "#6b7280",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#64748b",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#78716c",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#71717a",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#a3a3a3",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#9ca3af",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#94a3b8",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#a8a29e",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#a1a1aa",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--popover": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#171717",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--popover-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#0a0a0a"
+        },
+        {
+          "value": "#030712",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#020617",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#0c0a09",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#09090b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--primary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#171717"
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#e5e5e5",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#e5e7eb",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#e2e8f0",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#e5e5e5",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#e4e4e7",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#dc2626",
+          "theme": {
+            "Accent": "Red"
+          }
+        },
+        {
+          "value": "#e11d48",
+          "theme": {
+            "Accent": "Rose"
+          }
+        },
+        {
+          "value": "#ea580c",
+          "theme": {
+            "Accent": "Orange"
+          }
+        },
+        {
+          "value": "#65a30d",
+          "theme": {
+            "Accent": "Green"
+          }
+        },
+        {
+          "value": "#1d4ed8",
+          "theme": {
+            "Accent": "Blue"
+          }
+        },
+        {
+          "value": "#facc15",
+          "theme": {
+            "Accent": "Yellow"
+          }
+        },
+        {
+          "value": "#7c3aed",
+          "theme": {
+            "Accent": "Violet"
+          }
+        },
+        {
+          "value": "#ef4444",
+          "theme": {
+            "Accent": "Red",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#f43f5e",
+          "theme": {
+            "Accent": "Rose",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#f97316",
+          "theme": {
+            "Accent": "Orange",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#65a30d",
+          "theme": {
+            "Accent": "Green",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1d4ed8",
+          "theme": {
+            "Accent": "Blue",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#eab308",
+          "theme": {
+            "Accent": "Yellow",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#8b5cf6",
+          "theme": {
+            "Accent": "Violet",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--primary-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#171717",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#fef2f2",
+          "theme": {
+            "Accent": "Red"
+          }
+        },
+        {
+          "value": "#fff1f2",
+          "theme": {
+            "Accent": "Rose"
+          }
+        },
+        {
+          "value": "#fff7ed",
+          "theme": {
+            "Accent": "Orange"
+          }
+        },
+        {
+          "value": "#f7fee7",
+          "theme": {
+            "Accent": "Green"
+          }
+        },
+        {
+          "value": "#eff6ff",
+          "theme": {
+            "Accent": "Blue"
+          }
+        },
+        {
+          "value": "#713f12",
+          "theme": {
+            "Accent": "Yellow"
+          }
+        },
+        {
+          "value": "#f5f3ff",
+          "theme": {
+            "Accent": "Violet"
+          }
+        }
+      ]
+    },
+    "--ring": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#a3a3a3"
+        },
+        {
+          "value": "#9ca3af",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#94a3b8",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#a8a29e",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#a1a1aa",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#737373",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#6b7280",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#64748b",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#78716c",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#71717a",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#7f1d1d",
+          "theme": {
+            "Accent": "Red"
+          }
+        },
+        {
+          "value": "#fb7185",
+          "theme": {
+            "Accent": "Rose"
+          }
+        },
+        {
+          "value": "#fb923c",
+          "theme": {
+            "Accent": "Orange"
+          }
+        },
+        {
+          "value": "#a3e635",
+          "theme": {
+            "Accent": "Green"
+          }
+        },
+        {
+          "value": "#3b82f6",
+          "theme": {
+            "Accent": "Blue"
+          }
+        },
+        {
+          "value": "#713f12",
+          "theme": {
+            "Accent": "Yellow"
+          }
+        },
+        {
+          "value": "#a78bfa",
+          "theme": {
+            "Accent": "Violet"
+          }
+        },
+        {
+          "value": "#dc2626",
+          "theme": {
+            "Accent": "Red",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#881337",
+          "theme": {
+            "Accent": "Rose",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#7c2d12",
+          "theme": {
+            "Accent": "Orange",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#365314",
+          "theme": {
+            "Accent": "Green",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#2563eb",
+          "theme": {
+            "Accent": "Blue",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#ca8a06",
+          "theme": {
+            "Accent": "Yellow",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#4c1d95",
+          "theme": {
+            "Accent": "Violet",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--secondary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#f5f5f5"
+        },
+        {
+          "value": "#262626",
+          "theme": {
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1f2937",
+          "theme": {
+            "Base": "Gray",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#1e293b",
+          "theme": {
+            "Base": "Slate",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#292524",
+          "theme": {
+            "Base": "Stone",
+            "Mode": "Dark"
+          }
+        },
+        {
+          "value": "#27272a",
+          "theme": {
+            "Base": "Zinc",
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--secondary-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#171717"
+        },
+        {
+          "value": "#111827",
+          "theme": {
+            "Base": "Gray"
+          }
+        },
+        {
+          "value": "#0f172a",
+          "theme": {
+            "Base": "Slate"
+          }
+        },
+        {
+          "value": "#1c1917",
+          "theme": {
+            "Base": "Stone"
+          }
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Base": "Zinc"
+          }
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#18181b",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-accent": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#f4f4f4"
+        },
+        {
+          "value": "#2a2a30",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-accent-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#18181b"
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-border": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#e4e4e7"
+        },
+        {
+          "value": "#ffffff1a",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#09090b"
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-primary": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#18181b"
+        },
+        {
+          "value": "#1447e6",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-primary-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fafafa"
+        },
+        {
+          "value": "#fafafa",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--sidebar-ring": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#71717a"
+        },
+        {
+          "value": "#71717a",
+          "theme": {
+            "Mode": "Dark"
+          }
+        }
+      ]
+    },
+    "--white": {
+      "type": "color",
+      "value": "#ffffffff"
+    }
+  },
+  "pages": [
+    {
+      "id": "n132",
+      "name": "Page 1",
+      "children": [
+        {
+          "type": "frame",
+          "id": "op-skeleton-1787087677134874000-root-11",
+          "name": "Landing Page",
+          "width": 1440.0,
+          "height": 3500.0,
+          "layout": "vertical",
+          "gap": 0.0,
+          "fill": [
+            {
+              "type": "solid",
+              "color": "#ffffff"
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134889000-section-12",
+              "name": "Header",
+              "width": "fill_container",
+              "height": 72.0,
+              "layout": "horizontal",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#ffffff"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n1",
+                  "name": "Header Container",
+                  "width": 1344.0,
+                  "height": 40.0,
+                  "layout": "horizontal",
+                  "gap": 32.0,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n2",
+                      "name": "Logo Area",
+                      "layout": "horizontal",
+                      "gap": 8.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n3",
+                          "name": "Logo Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n4",
+                          "name": "Logo Dot",
+                          "width": 8.0,
+                          "height": 8.0,
+                          "cornerRadius": 4.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#2563eb"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n5",
+                      "name": "Nav Links",
+                      "layout": "horizontal",
+                      "gap": 32.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n6",
+                          "name": "Link Como Funciona",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n7",
+                          "name": "Link Beneficios",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n8",
+                          "name": "Link FAQ",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n9",
+                          "name": "Link Contacto",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n10",
+                      "name": "Auth Area",
+                      "layout": "horizontal",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n11",
+                          "name": "Login Link",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#2563eb"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n12",
+                          "name": "CTA Header",
+                          "width": 160.0,
+                          "height": 40.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#2563eb"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n13",
+                              "name": "CTA Text",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#ffffff"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134913000-section-13",
+              "name": "Hero",
+              "width": "fill_container",
+              "height": 520.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n14",
+                  "name": "Hero Content",
+                  "width": 800.0,
+                  "layout": "vertical",
+                  "gap": 24.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n15",
+                      "name": "Hero Title",
+                      "width": 800.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#0f172a"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n16",
+                      "name": "Hero Subtitle",
+                      "width": 600.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#64748b"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n17",
+                      "name": "CTAs",
+                      "layout": "horizontal",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n18",
+                          "name": "CTA Principal",
+                          "width": 220.0,
+                          "height": 48.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#2563eb"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n19",
+                              "name": "CTA Text",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#ffffff"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n20",
+                          "name": "CTA Secundario",
+                          "width": 200.0,
+                          "height": 48.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n21",
+                              "name": "CTA Sec Text",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134929000-section-14",
+              "name": "Como Funciona",
+              "width": "fill_container",
+              "height": 400.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#ffffff"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n22",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n23",
+                  "name": "Section Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n24",
+                  "name": "Steps Row",
+                  "layout": "horizontal",
+                  "gap": 48.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n25",
+                      "name": "Step 1",
+                      "width": 240.0,
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n26",
+                          "name": "Step 1 Icon",
+                          "width": 64.0,
+                          "height": 64.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#eff6ff"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n27",
+                              "name": "Step 1 Num",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n28",
+                          "name": "Step 1 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n29",
+                          "name": "Step 1 Desc",
+                          "width": 220.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n30",
+                      "name": "Step 2",
+                      "width": 240.0,
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n31",
+                          "name": "Step 2 Icon",
+                          "width": 64.0,
+                          "height": 64.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#eff6ff"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n32",
+                              "name": "Step 2 Num",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n33",
+                          "name": "Step 2 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n34",
+                          "name": "Step 2 Desc",
+                          "width": 220.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n35",
+                      "name": "Step 3",
+                      "width": 240.0,
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n36",
+                          "name": "Step 3 Icon",
+                          "width": 64.0,
+                          "height": 64.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#eff6ff"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n37",
+                              "name": "Step 3 Num",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n38",
+                          "name": "Step 3 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n39",
+                          "name": "Step 3 Desc",
+                          "width": 220.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n40",
+                      "name": "Step 4",
+                      "width": 240.0,
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n41",
+                          "name": "Step 4 Icon",
+                          "width": 64.0,
+                          "height": 64.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#eff6ff"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n42",
+                              "name": "Step 4 Num",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n43",
+                          "name": "Step 4 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n44",
+                          "name": "Step 4 Desc",
+                          "width": 220.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134935000-section-15",
+              "name": "Tipos de Personal",
+              "width": "fill_container",
+              "height": 350.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n45",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n46",
+                  "name": "Section Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n47",
+                  "name": "Cards Row",
+                  "layout": "horizontal",
+                  "gap": 24.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n48",
+                      "name": "Card Tech Wrapper",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n49",
+                          "name": "Card Tech",
+                          "width": 200.0,
+                          "height": 120.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n50",
+                              "name": "Tech Icon",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n51",
+                              "name": "Tech Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n52",
+                      "name": "Card Admin Wrapper",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n53",
+                          "name": "Card Admin",
+                          "width": 200.0,
+                          "height": 120.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n54",
+                              "name": "Admin Icon",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n55",
+                              "name": "Admin Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n56",
+                      "name": "Card Sales Wrapper",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n57",
+                          "name": "Card Sales",
+                          "width": 200.0,
+                          "height": 120.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n58",
+                              "name": "Sales Icon",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n59",
+                              "name": "Sales Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n60",
+                      "name": "Card Support Wrapper",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n61",
+                          "name": "Card Support",
+                          "width": 200.0,
+                          "height": 120.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n62",
+                              "name": "Support Icon",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n63",
+                              "name": "Support Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n64",
+                      "name": "Card Other Wrapper",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n65",
+                          "name": "Card Other",
+                          "width": 200.0,
+                          "height": 120.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n66",
+                              "name": "Other Icon",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n67",
+                              "name": "Other Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134938000-section-16",
+              "name": "Beneficios",
+              "width": "fill_container",
+              "height": 400.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#ffffff"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n68",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n69",
+                  "name": "Section Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n70",
+                  "name": "Benefits Row",
+                  "layout": "horizontal",
+                  "gap": 48.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n71",
+                      "name": "Benefit 1",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n72",
+                          "name": "Benefit 1 Icon",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#22c55e"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n73",
+                          "name": "Benefit 1 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n74",
+                          "name": "Benefit 1 Desc",
+                          "width": 280.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n75",
+                      "name": "Benefit 2",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n76",
+                          "name": "Benefit 2 Icon",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#22c55e"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n77",
+                          "name": "Benefit 2 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n78",
+                          "name": "Benefit 2 Desc",
+                          "width": 280.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n79",
+                      "name": "Benefit 3",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n80",
+                          "name": "Benefit 3 Icon",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#22c55e"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n81",
+                          "name": "Benefit 3 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n82",
+                          "name": "Benefit 3 Desc",
+                          "width": 280.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n83",
+                      "name": "Benefit 4",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n84",
+                          "name": "Benefit 4 Icon",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#22c55e"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n85",
+                          "name": "Benefit 4 Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n86",
+                          "name": "Benefit 4 Desc",
+                          "width": 280.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134941000-section-17",
+              "name": "FAQ",
+              "width": "fill_container",
+              "height": 500.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n87",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n88",
+                  "name": "FAQ List",
+                  "layout": "vertical",
+                  "gap": 24.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n89",
+                      "name": "FAQ 1",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n90",
+                          "name": "FAQ 1 Q",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n91",
+                          "name": "FAQ 1 A",
+                          "width": 800.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n92",
+                      "name": "FAQ 2",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n93",
+                          "name": "FAQ 2 Q",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n94",
+                          "name": "FAQ 2 A",
+                          "width": 800.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n95",
+                      "name": "FAQ 3",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n96",
+                          "name": "FAQ 3 Q",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n97",
+                          "name": "FAQ 3 A",
+                          "width": 800.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n98",
+                      "name": "FAQ 4",
+                      "layout": "vertical",
+                      "gap": 8.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n99",
+                          "name": "FAQ 4 Q",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n100",
+                          "name": "FAQ 4 A",
+                          "width": 800.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134943000-section-18",
+              "name": "Condiciones de Pago",
+              "width": "fill_container",
+              "height": 350.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#ffffff"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n101",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n102",
+                  "name": "Section Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n103",
+                  "height": 200.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n104",
+                      "name": "Payment Card",
+                      "width": 800.0,
+                      "height": 200.0,
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "cornerRadius": 12.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "stroke": {
+                        "thickness": 1.0,
+                        "fill": [
+                          {
+                            "type": "solid",
+                            "color": "#e2e8f0"
+                          }
+                        ]
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n105",
+                          "name": "Payment Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n106",
+                          "name": "Payment Desc",
+                          "width": 700.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#64748b"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n107",
+                          "name": "Methods Title",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#0f172a"
+                            }
+                          ],
+                          "children": []
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n108",
+                          "name": "Methods Container",
+                          "layout": "vertical",
+                          "gap": 8.0,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n109",
+                              "name": "Methods Row",
+                              "layout": "horizontal",
+                              "gap": 24.0,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "n110",
+                                  "name": "Method 1",
+                                  "fill": [
+                                    {
+                                      "type": "solid",
+                                      "color": "#2563eb"
+                                    }
+                                  ],
+                                  "children": []
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "n111",
+                                  "name": "Method 2",
+                                  "fill": [
+                                    {
+                                      "type": "solid",
+                                      "color": "#2563eb"
+                                    }
+                                  ],
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134946000-section-19",
+              "name": "Contacto",
+              "width": "fill_container",
+              "height": 400.0,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n112",
+                  "name": "Section Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n113",
+                  "name": "Section Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n114",
+                  "height": 280.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n115",
+                      "name": "Contact Form",
+                      "width": 600.0,
+                      "height": 280.0,
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "cornerRadius": 12.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "stroke": {
+                        "thickness": 1.0,
+                        "fill": [
+                          {
+                            "type": "solid",
+                            "color": "#e2e8f0"
+                          }
+                        ]
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n116",
+                          "name": "Name Input",
+                          "width": 520.0,
+                          "height": 40.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#f8fafc"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n117",
+                              "name": "Name Placeholder",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#94a3b8"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n118",
+                          "name": "Email Input",
+                          "width": 520.0,
+                          "height": 40.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#f8fafc"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n119",
+                              "name": "Email Placeholder",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#94a3b8"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n120",
+                          "name": "Message Input",
+                          "width": 520.0,
+                          "height": 100.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#f8fafc"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n121",
+                              "name": "Message Placeholder",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#94a3b8"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n122",
+                          "name": "Submit Button",
+                          "width": 520.0,
+                          "height": 40.0,
+                          "cornerRadius": 8.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#2563eb"
+                            }
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n123",
+                              "name": "Submit Text",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#ffffff"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087677134949000-section-20",
+              "name": "Footer",
+              "width": "fill_container",
+              "height": 200.0,
+              "layout": "horizontal",
+              "justifyContent": "space_between",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#0f172a"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n124",
+                  "name": "Footer Brand",
+                  "layout": "vertical",
+                  "gap": 8.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n125",
+                      "name": "Footer Logo",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n126",
+                      "name": "Footer Tagline",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n127",
+                  "name": "Footer Links",
+                  "layout": "vertical",
+                  "gap": 12.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n128",
+                      "name": "Footer Link 1",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n129",
+                      "name": "Footer Link 2",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n130",
+                      "name": "Footer Link 3",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n131",
+                  "name": "Footer Copyright",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#94a3b8"
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n133",
+      "name": "Dashboard Empresa",
+      "children": [
+        {
+          "type": "frame",
+          "id": "op-skeleton-1787087821412341000-root-21",
+          "name": "Dashboard Empresa",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1440.0,
+          "height": 1800.0,
+          "layout": "horizontal",
+          "gap": 0.0,
+          "fill": [
+            {
+              "type": "solid",
+              "color": "#f8fafc"
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087821412345000-section-22",
+              "name": "Sidebar",
+              "width": 260.0,
+              "height": 900.0,
+              "layout": "vertical",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#0f172a"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n134",
+                  "name": "Logo Area",
+                  "layout": "vertical",
+                  "gap": 8.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n135",
+                      "name": "Logo",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n136",
+                      "name": "Role Badge",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n137",
+                  "name": "Nav Links",
+                  "height": 200.0,
+                  "layout": "vertical",
+                  "gap": 4.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n138",
+                      "name": "Nav Dashboard",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "cornerRadius": 8.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#1e40af"
+                        }
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n139",
+                          "name": "Dashboard Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n140",
+                      "name": "Nav Solicitar",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n141",
+                          "name": "Solicitar Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n142",
+                      "name": "Nav Procesos",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n143",
+                          "name": "Procesos Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n144",
+                      "name": "Nav Candidatos",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n145",
+                          "name": "Candidatos Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n146",
+                      "name": "Nav Historial",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n147",
+                          "name": "Historial Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n148",
+                  "name": "Bottom Nav",
+                  "height": 80.0,
+                  "layout": "vertical",
+                  "gap": 4.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n149",
+                      "name": "Nav Perfil",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n150",
+                          "name": "Perfil Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n151",
+                      "name": "Nav Notificaciones",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n152",
+                          "name": "Notif Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087821412356000-section-23",
+              "name": "Main Content",
+              "width": 1180.0,
+              "height": 900.0,
+              "layout": "vertical",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n153",
+                  "name": "Header",
+                  "layout": "vertical",
+                  "gap": 4.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n154",
+                      "name": "Welcome",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#0f172a"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n155",
+                      "name": "Subtitle",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#64748b"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n156",
+                  "name": "Stats Row",
+                  "layout": "horizontal",
+                  "gap": 24.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n157",
+                      "name": "Stat 1 Wrapper",
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n158",
+                          "name": "Stat Active",
+                          "width": 260.0,
+                          "height": 100.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n159",
+                              "name": "Stat 1 Number",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n160",
+                              "name": "Stat 1 Label",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n161",
+                      "name": "Stat 2 Wrapper",
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n162",
+                          "name": "Stat Candidates",
+                          "width": 260.0,
+                          "height": 100.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n163",
+                              "name": "Stat 2 Number",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#22c55e"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n164",
+                              "name": "Stat 2 Label",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n165",
+                      "name": "Stat 3 Wrapper",
+                      "layout": "vertical",
+                      "gap": 16.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n166",
+                          "name": "Stat Interviews",
+                          "width": 260.0,
+                          "height": 100.0,
+                          "cornerRadius": 12.0,
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "stroke": {
+                            "thickness": 1.0,
+                            "fill": [
+                              {
+                                "type": "solid",
+                                "color": "#e2e8f0"
+                              }
+                            ]
+                          },
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n167",
+                              "name": "Stat 3 Number",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#f59e0b"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n168",
+                              "name": "Stat 3 Label",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n169",
+                  "name": "Processes Section",
+                  "layout": "vertical",
+                  "gap": 16.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n170",
+                      "name": "Section Title",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#0f172a"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n171",
+                      "name": "Processes List",
+                      "layout": "vertical",
+                      "gap": 12.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n172",
+                          "name": "Process 1",
+                          "layout": "vertical",
+                          "gap": 4.0,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n173",
+                              "name": "Process 1 Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n174",
+                              "name": "Process 1 Company",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n175",
+                              "name": "Process 1 Status",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#2563eb"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n176",
+                          "name": "Process 2",
+                          "layout": "vertical",
+                          "gap": 4.0,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n177",
+                              "name": "Process 2 Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n178",
+                              "name": "Process 2 Company",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n179",
+                              "name": "Process 2 Status",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#22c55e"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "n180",
+                          "name": "Process 3",
+                          "layout": "vertical",
+                          "gap": 4.0,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n181",
+                              "name": "Process 3 Title",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#0f172a"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n182",
+                              "name": "Process 3 Company",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#64748b"
+                                }
+                              ],
+                              "children": []
+                            },
+                            {
+                              "type": "frame",
+                              "id": "n183",
+                              "name": "Process 3 Status",
+                              "fill": [
+                                {
+                                  "type": "solid",
+                                  "color": "#f59e0b"
+                                }
+                              ],
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n184",
+                  "name": "CTA Button",
+                  "width": 200.0,
+                  "height": 48.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#2563eb"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n185",
+                      "name": "CTA Text",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n186",
+      "name": "Wizard Solicitud",
+      "children": [
+        {
+          "type": "frame",
+          "id": "op-skeleton-1787087881133547000-root-24",
+          "name": "Wizard Solicitud",
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1440.0,
+          "height": 1800.0,
+          "layout": "horizontal",
+          "gap": 0.0,
+          "fill": [
+            {
+              "type": "solid",
+              "color": "#f8fafc"
+            }
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087881133552000-section-25",
+              "name": "Sidebar",
+              "width": 260.0,
+              "height": 900.0,
+              "layout": "vertical",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#0f172a"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n187",
+                  "name": "Logo Area",
+                  "layout": "vertical",
+                  "gap": 8.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n188",
+                      "name": "Logo",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n189",
+                      "name": "Role Badge",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n190",
+                  "name": "Nav Links",
+                  "height": 120.0,
+                  "layout": "vertical",
+                  "gap": 4.0,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n191",
+                      "name": "Nav Dashboard",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "cornerRadius": 8.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#1e40af"
+                        }
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n192",
+                          "name": "Dashboard Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n193",
+                      "name": "Nav Solicitar",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n194",
+                          "name": "Solicitar Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#ffffff"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n195",
+                      "name": "Nav Procesos",
+                      "width": 228.0,
+                      "height": 40.0,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n196",
+                          "name": "Procesos Text",
+                          "fill": [
+                            {
+                              "type": "solid",
+                              "color": "#94a3b8"
+                            }
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "op-skeleton-1787087881133565000-section-26",
+              "name": "Main Content",
+              "width": 1180.0,
+              "height": 900.0,
+              "layout": "vertical",
+              "fill": [
+                {
+                  "type": "solid",
+                  "color": "#f8fafc"
+                }
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n197",
+                  "name": "Title",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n198",
+                  "name": "Subtitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#64748b"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n199",
+                  "name": "Stepper",
+                  "height": 202.0,
+                  "layout": "horizontal",
+                  "gap": 8.0,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n200",
+                      "name": "Step1",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#2563eb"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n201",
+                      "name": "Label1",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#2563eb"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n202",
+                      "name": "Line1",
+                      "width": 30.0,
+                      "height": 2.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n203",
+                      "name": "Step2",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n204",
+                      "name": "Label2",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n205",
+                      "name": "Line2",
+                      "width": 30.0,
+                      "height": 2.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n206",
+                      "name": "Step3",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n207",
+                      "name": "Label3",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n208",
+                      "name": "Line3",
+                      "width": 30.0,
+                      "height": 2.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n209",
+                      "name": "Step4",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n210",
+                      "name": "Label4",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n211",
+                      "name": "Line4",
+                      "width": 30.0,
+                      "height": 2.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n212",
+                      "name": "Step5",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n213",
+                      "name": "Label5",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n214",
+                      "name": "Line5",
+                      "width": 30.0,
+                      "height": 2.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n215",
+                      "name": "Step6",
+                      "width": 32.0,
+                      "height": 32.0,
+                      "cornerRadius": 16.0,
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#e2e8f0"
+                        }
+                      ],
+                      "children": []
+                    },
+                    {
+                      "type": "frame",
+                      "id": "n216",
+                      "name": "Label6",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#94a3b8"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n217",
+                  "name": "FormTitle",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#0f172a"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n218",
+                  "name": "Label Nombre",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#374151"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n219",
+                  "name": "Input Nombre",
+                  "width": 980.0,
+                  "height": 40.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#ffffff"
+                    }
+                  ],
+                  "stroke": {
+                    "thickness": 1.0,
+                    "fill": [
+                      {
+                        "type": "solid",
+                        "color": "#d1d5db"
+                      }
+                    ]
+                  },
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n220",
+                  "name": "Label Industria",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#374151"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n221",
+                  "name": "Input Industria",
+                  "width": 980.0,
+                  "height": 40.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#ffffff"
+                    }
+                  ],
+                  "stroke": {
+                    "thickness": 1.0,
+                    "fill": [
+                      {
+                        "type": "solid",
+                        "color": "#d1d5db"
+                      }
+                    ]
+                  },
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n222",
+                  "name": "Label Contacto",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#374151"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n223",
+                  "name": "Input Contacto",
+                  "width": 980.0,
+                  "height": 40.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#ffffff"
+                    }
+                  ],
+                  "stroke": {
+                    "thickness": 1.0,
+                    "fill": [
+                      {
+                        "type": "solid",
+                        "color": "#d1d5db"
+                      }
+                    ]
+                  },
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n224",
+                  "name": "Label Email",
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#374151"
+                    }
+                  ],
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n225",
+                  "name": "Input Email",
+                  "width": 980.0,
+                  "height": 40.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#ffffff"
+                    }
+                  ],
+                  "stroke": {
+                    "thickness": 1.0,
+                    "fill": [
+                      {
+                        "type": "solid",
+                        "color": "#d1d5db"
+                      }
+                    ]
+                  },
+                  "children": []
+                },
+                {
+                  "type": "frame",
+                  "id": "n226",
+                  "name": "CancelBtn",
+                  "width": 120.0,
+                  "height": 48.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#ffffff"
+                    }
+                  ],
+                  "stroke": {
+                    "thickness": 1.0,
+                    "fill": [
+                      {
+                        "type": "solid",
+                        "color": "#d1d5db"
+                      }
+                    ]
+                  },
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n227",
+                      "name": "CancelText",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#374151"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n228",
+                  "name": "NextBtn",
+                  "width": 160.0,
+                  "height": 48.0,
+                  "cornerRadius": 8.0,
+                  "fill": [
+                    {
+                      "type": "solid",
+                      "color": "#2563eb"
+                    }
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n229",
+                      "name": "NextText",
+                      "fill": [
+                        {
+                          "type": "solid",
+                          "color": "#ffffff"
+                        }
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "children": [],
+  "editorMeta": {
+    "activePageIndex": 2,
+    "preserveAuthoredGeometry": false
+  }
+}

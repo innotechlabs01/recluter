@@ -1,0 +1,21 @@
+{
+  "app": {
+    "name": "Recluter"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search"
+  },
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "jobs": "Jobs",
+    "candidates": "Candidates",
+    "settings": "Settings"
+  }
+}
