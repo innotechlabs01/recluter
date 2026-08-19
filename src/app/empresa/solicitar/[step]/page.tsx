@@ -3,26 +3,28 @@
 import { useParams, useRouter } from 'next/navigation'
 import { Stepper } from '@/components/wizard/stepper'
 import { StepCompany } from '@/components/wizard/step-company'
+import { StepPosition } from '@/components/wizard/step-position'
+import { StepProfile } from '@/components/wizard/step-profile'
+import { StepConditions } from '@/components/wizard/step-conditions'
+import { StepSelection } from '@/components/wizard/step-selection'
+import { StepReview } from '@/components/wizard/step-review'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+
+const steps: Record<number, { component: React.ComponentType; title: string }> = {
+  1: { component: StepCompany, title: 'Información de la empresa' },
+  2: { component: StepPosition, title: 'Posición requerida' },
+  3: { component: StepProfile, title: 'Perfil del candidato' },
+  4: { component: StepConditions, title: 'Condiciones laborales' },
+  5: { component: StepSelection, title: 'Proceso de selección' },
+  6: { component: StepReview, title: 'Revisión y confirmación' },
+}
 
 export default function WizardStepPage() {
   const params = useParams()
   const router = useRouter()
   const step = Number(params.step)
-
-  const steps: Record<number, { component: React.ComponentType; title: string }> = {
-    1: { component: StepCompany, title: 'Información de la empresa' },
-  }
-
-  const current = steps[step] || {
-    component: () => (
-      <div className="text-center py-12 text-slate-500">
-        Paso {step} — Próximamente
-      </div>
-    ),
-    title: `Paso ${step}`,
-  }
+  const current = steps[step] || steps[1]
   const CurrentStepComponent = current.component
 
   return (
