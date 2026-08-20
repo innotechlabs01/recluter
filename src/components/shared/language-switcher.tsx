@@ -1,24 +1,22 @@
 'use client'
 
-import { useRouter, usePathname } from 'next/navigation'
+import { useLocale } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 
 export function LanguageSwitcher() {
+  const locale = useLocale()
   const router = useRouter()
-  const pathname = usePathname()
 
   const toggleLocale = () => {
-    const currentPath = pathname
-    if (currentPath.startsWith('/en')) {
-      router.push(currentPath.replace('/en', '/es') || '/')
-    } else {
-      router.push('/en' + currentPath)
-    }
+    const newLocale = locale === 'es' ? 'en' : 'es'
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`
+    router.refresh()
   }
 
   return (
     <Button variant="ghost" size="sm" onClick={toggleLocale}>
-      {pathname.startsWith('/en') ? 'ES' : 'EN'}
+      {locale === 'es' ? 'EN' : 'ES'}
     </Button>
   )
 }
