@@ -1,6 +1,9 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { Shield, Zap, DollarSign, Globe } from 'lucide-react'
+
+const icons = [Shield, Zap, DollarSign, Globe]
 
 export function Benefits() {
   const t = useTranslations('landing.benefits')
@@ -8,6 +11,7 @@ export function Benefits() {
   const items = [0, 1, 2, 3].map((i) => ({
     title: t(`items.${i}.title`),
     description: t(`items.${i}.description`),
+    Icon: icons[i],
   }))
 
   return (
@@ -17,9 +21,11 @@ export function Benefits() {
         <p className="text-center text-slate-600 mb-12">{t('subtitle')}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {items.map((benefit, i) => (
-            <div key={i} className="bg-white p-6 rounded-lg border">
-              <span className="text-2xl">✅</span>
-              <h3 className="font-semibold text-slate-900 mt-4 mb-2">{benefit.title}</h3>
+            <div key={i} className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-4">
+                <benefit.Icon className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-slate-900 mb-2">{benefit.title}</h3>
               <p className="text-sm text-slate-600">{benefit.description}</p>
             </div>
           ))}

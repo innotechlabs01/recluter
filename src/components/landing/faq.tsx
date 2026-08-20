@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 
 export function FAQ() {
   const t = useTranslations('landing.faq')
@@ -14,14 +15,18 @@ export function FAQ() {
     <section id="faq" className="py-20">
       <div className="container mx-auto px-4 max-w-3xl">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">{t('title')}</h2>
-        <div className="space-y-6">
+        <Accordion multiple className="space-y-2">
           {items.map((faq, i) => (
-            <div key={i} className="border-b pb-6">
-              <h3 className="font-semibold text-slate-900 mb-2">{faq.q}</h3>
-              <p className="text-slate-600">{faq.a}</p>
-            </div>
+            <AccordionItem key={i} value={`faq-${i}`} className="border rounded-lg px-4">
+              <AccordionTrigger className="text-left font-semibold text-slate-900 hover:no-underline py-4">
+                {faq.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-600 pb-4">
+                {faq.a}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
       </div>
     </section>
   )
