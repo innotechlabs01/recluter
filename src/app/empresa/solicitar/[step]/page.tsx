@@ -1,6 +1,7 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
+import { useWizardStore } from '@/hooks/use-wizard'
 import { Stepper } from '@/components/wizard/stepper'
 import { StepCompany } from '@/components/wizard/step-company'
 import { StepPosition } from '@/components/wizard/step-position'
@@ -24,8 +25,90 @@ export default function WizardStepPage() {
   const params = useParams()
   const router = useRouter()
   const step = Number(params.step)
+  const { setStep, reset } = useWizardStore()
   const current = steps[step] || steps[1]
   const CurrentStepComponent = current.component
+
+  const handleNext = () => {
+    setStep(step + 1)
+    router.push(`/empresa/solicitar/${step + 1}`)
+  }
+
+  const handleBack = () => {
+    if (step > 1) {
+      setStep(step - 1)
+      router.push(`/empresa/solicitar/${step - 1}`)
+    } else {
+      router.push('/empresa/dashboard')
+    }
+  }
+
+  const handleSubmit = async () => {
+    const { data } = useWizardStore.getState()
+
+    try {
+      const response = await fetch('/api/solicitudes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          positionTitle: data.positionTitle,
+          positionsCount: data.positionsCount,
+          workMode: data.workMode,
+          positionLocation: data.positionLocation,
+          salaryMin: data.salaryMin,
+          salaryMax: data.salaryMax,
+          currency: data.currency,
+          companyData: {
+            companyName: data.companyName,
+            industry: data.industry,
+            location: data.location,
+            contactName: data.contactName,
+            contactRole: data.contactRole,
+            contactEmail: data.contactEmail,
+          },
+          positionData: {
+            positionTitle: data.positionTitle,
+            positionsCount: data.positionsCount,
+            area: data.area,
+            experienceLevel: data.experienceLevel,
+            positionType: data.positionType,
+            workMode: data.workMode,
+          },
+          profileData: {
+            minExperience: data.minExperience,
+            englishLevel: data.englishLevel,
+            education: data.education,
+            technicalSkills: data.technicalSkills,
+            softSkills: data.softSkills,
+          },
+          conditionsData: {
+            salaryMin: data.salaryMin,
+            salaryMax: data.salaryMax,
+            currency: data.currency,
+            contractType: data.contractType,
+            schedule: data.schedule,
+            timezone: data.timezone,
+            benefits: data.benefits,
+          },
+          selectionData: {
+            candidatesCount: data.candidatesCount,
+            deadline: data.deadline,
+            interviewCount: data.interviewCount,
+            technicalTests: data.technicalTests,
+          },
+        }),
+      })
+
+      if (response.ok) {
+        reset()
+        router.push('/empresa/dashboard')
+      } else {
+        alert('Error al enviar la solicitud')
+      }
+    } catch (error) {
+      alert('Error de conexión')
+    }
+  }
 
   return (
     <div className="space-y-6">
@@ -45,23 +128,10 @@ export default function WizardStepPage() {
       </Card>
 
       <div className="flex justify-between">
-        <Button
-          variant="outline"
-          onClick={() =>
-            step > 1
-              ? router.push(`/empresa/solicitar/${step - 1}`)
-              : router.push('/empresa/dashboard')
-          }
-        >
+        <Button variant="outline" onClick={handleBack}>
           {step > 1 ? '← Atrás' : 'Cancelar'}
         </Button>
-        <Button
-          onClick={() =>
-            step < 6
-              ? router.push(`/empresa/solicitar/${step + 1}`)
-              : alert('Solicitud enviada!')
-          }
-        >
+        <Button onClick={step < 6 ? handleNext : handleSubmit}>
           {step < 6 ? 'Siguiente →' : 'Enviar solicitud'}
         </Button>
       </div>

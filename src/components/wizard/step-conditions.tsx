@@ -1,3 +1,6 @@
+'use client'
+
+import { useWizardStore } from '@/hooks/use-wizard'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -10,6 +13,8 @@ import {
 } from '@/components/ui/select'
 
 export function StepConditions() {
+  const { data, updateData } = useWizardStore()
+
   return (
     <div className="space-y-6">
       <div>
@@ -23,27 +28,45 @@ export function StepConditions() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="salaryMin">Rango salarial mínimo</Label>
-          <Input id="salaryMin" type="number" placeholder="1000" />
+          <Input 
+            id="salaryMin" 
+            type="number" 
+            placeholder="1000"
+            value={data.salaryMin || ''}
+            onChange={(e) => updateData({ salaryMin: Number(e.target.value) })}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="salaryMax">Rango salarial máximo</Label>
-          <Input id="salaryMax" type="number" placeholder="3000" />
+          <Input 
+            id="salaryMax" 
+            type="number" 
+            placeholder="3000"
+            value={data.salaryMax || ''}
+            onChange={(e) => updateData({ salaryMax: Number(e.target.value) })}
+          />
         </div>
         <div className="space-y-2">
           <Label>Moneda</Label>
-          <Select defaultValue="usd">
+          <Select 
+            value={data.currency} 
+            onValueChange={(value) => value && updateData({ currency: value })}
+          >
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="usd">USD</SelectItem>
-              <SelectItem value="cop">COP</SelectItem>
+              <SelectItem value="USD">USD</SelectItem>
+              <SelectItem value="COP">COP</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
           <Label>Tipo de contratación</Label>
-          <Select>
+          <Select 
+            value={data.contractType} 
+            onValueChange={(value) => value && updateData({ contractType: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
@@ -56,20 +79,28 @@ export function StepConditions() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="schedule">Horario</Label>
-          <Input id="schedule" placeholder="Ej: 9:00 AM - 6:00 PM" />
+          <Input 
+            id="schedule" 
+            placeholder="Ej: 9:00 AM - 6:00 PM"
+            value={data.schedule}
+            onChange={(e) => updateData({ schedule: e.target.value })}
+          />
         </div>
         <div className="space-y-2">
           <Label>Zona horaria</Label>
-          <Select>
+          <Select 
+            value={data.timezone} 
+            onValueChange={(value) => value && updateData({ timezone: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="cet">CET (Europa)</SelectItem>
-              <SelectItem value="est">EST (East Coast)</SelectItem>
-              <SelectItem value="cst">CST (Central)</SelectItem>
-              <SelectItem value="pst">PST (West Coast)</SelectItem>
-              <SelectItem value="cot">COT (Colombia)</SelectItem>
+              <SelectItem value="CET">CET (Europa)</SelectItem>
+              <SelectItem value="EST">EST (East Coast)</SelectItem>
+              <SelectItem value="CST">CST (Central)</SelectItem>
+              <SelectItem value="PST">PST (West Coast)</SelectItem>
+              <SelectItem value="COT">COT (Colombia)</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -79,6 +110,8 @@ export function StepConditions() {
             id="benefits"
             placeholder="Ej: Seguro médico, vacaciones pagas, bono anual"
             rows={3}
+            value={data.benefits}
+            onChange={(e) => updateData({ benefits: e.target.value })}
           />
         </div>
         <div className="space-y-2 md:col-span-2">
@@ -87,6 +120,8 @@ export function StepConditions() {
             id="additionalInfo"
             placeholder="Cualquier otro requisito no contemplado"
             rows={3}
+            value={data.additionalInfo}
+            onChange={(e) => updateData({ additionalInfo: e.target.value })}
           />
         </div>
       </div>

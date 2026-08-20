@@ -1,3 +1,5 @@
+'use client'
+
 import { ProcessList } from '@/components/dashboard/process-list'
 
 export default function ProcesosPage() {

@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 
 const applications = [
@@ -13,25 +16,27 @@ const statusColors: Record<string, string> = {
   interviewed: 'bg-purple-100 text-purple-700',
 }
 
-const statusLabels: Record<string, string> = {
-  suggested: 'Enviada',
-  reviewed: 'Revisada',
-  shortlisted: 'Preseleccionado',
-  interviewed: 'Entrevistado',
-}
-
 export default function PostulacionesPage() {
+  const t = useTranslations('candidato.applications')
+
+  const statusLabels: Record<string, string> = {
+    suggested: t('sent'),
+    reviewed: t('reviewed'),
+    shortlisted: t('shortlisted'),
+    interviewed: t('interviewed'),
+  }
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Mis postulaciones</h1>
+      <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
       <div className="bg-white rounded-lg border overflow-hidden">
         <table className="w-full">
           <thead className="bg-slate-50">
             <tr>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Empresa</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Cargo</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Fecha</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Estado</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('company')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('position')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('date')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('status')}</th>
             </tr>
           </thead>
           <tbody>

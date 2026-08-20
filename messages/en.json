@@ -12,7 +12,25 @@
     "noResults": "No results found",
     "error": "An error occurred",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "view": "View",
+    "create": "Create",
+    "update": "Update",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "status": "Status",
+    "date": "Date",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "description": "Description",
+    "all": "All",
+    "none": "None",
+    "pending": "Pending",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "nav": {
     "home": "Home",
@@ -25,7 +43,11 @@
     "dashboard": "Dashboard",
     "jobs": "Jobs",
     "candidates": "Candidates",
-    "settings": "Settings"
+    "settings": "Settings",
+    "profile": "My Profile",
+    "notifications": "Notifications",
+    "history": "History",
+    "logout": "Logout"
   },
   "landing": {
     "hero": {
@@ -117,22 +139,30 @@
   },
   "auth": {
     "roleSelection": {
-      "title": "How do you want to use the platform?",
+      "title": "Welcome to Recluter",
+      "subtitle": "How do you want to use the platform?",
       "company": "I'm a company",
-      "companyDesc": "I need to hire personnel",
+      "companyDesc": "I need to hire personnel for my team",
+      "companyAction": "Create personnel request →",
       "candidate": "I'm looking for job opportunities",
-      "candidateDesc": "I want to find a job"
+      "candidateDesc": "I want to find a job at US companies",
+      "candidateAction": "Explore opportunities →",
+      "note": "You can change your profile later from settings"
     }
   },
   "empresa": {
     "dashboard": {
       "welcome": "Welcome",
       "subtitle": "Summary of your recruitment processes",
-      "activeProcesses": "Active processes",
-      "candidatesReceived": "Candidates received",
-      "pendingInterviews": "Pending interviews",
       "searchPersonnel": "Search personnel",
-      "activeProcessesList": "Active processes"
+      "totalRequests": "Total requests",
+      "activeProcesses": "Active processes",
+      "openPositions": "Open positions",
+      "successRate": "Success rate",
+      "recentRequests": "Recent requests",
+      "viewAll": "View all",
+      "noRequests": "No requests yet",
+      "createFirst": "Create first request"
     },
     "wizard": {
       "title": "New personnel request",
@@ -145,18 +175,177 @@
       "companyInfo": "Company information",
       "companySubtitle": "Basic company data for the request",
       "position": "Required position",
+      "positionSubtitle": "Details of the position you need to fill",
       "profile": "Candidate profile",
+      "profileSubtitle": "Define the characteristics the person should have",
       "conditions": "Employment conditions",
+      "conditionsSubtitle": "Define the conditions of the position",
       "selection": "Selection process",
+      "selectionSubtitle": "Define how you want the process to be",
       "review": "Review and confirmation",
+      "reviewSubtitle": "Review the information before submitting the request",
       "fields": {
         "companyName": "Company name *",
         "industry": "Industry *",
         "location": "Location *",
         "contactName": "Contact person *",
         "contactRole": "Role *",
-        "contactEmail": "Corporate email *"
+        "contactEmail": "Corporate email *",
+        "positionTitle": "Position title *",
+        "positionsCount": "Number of positions *",
+        "area": "Area *",
+        "experienceLevel": "Experience level *",
+        "positionType": "Position type *",
+        "workMode": "Work mode *",
+        "minExperience": "Minimum experience (years) *",
+        "englishLevel": "English level *",
+        "technicalSkills": "Technical skills *",
+        "softSkills": "Soft skills",
+        "salaryMin": "Minimum salary range",
+        "salaryMax": "Maximum salary range",
+        "currency": "Currency",
+        "candidatesCount": "Number of candidates to receive *",
+        "interviewCount": "Number of interviews"
       }
+    },
+    "processes": {
+      "title": "My processes",
+      "subtitle": "Track all your personnel requests",
+      "noProcesses": "No active processes"
+    },
+    "candidates": {
+      "title": "Candidates",
+      "subtitle": "Candidates associated with your selection processes"
+    },
+    "history": {
+      "title": "History",
+      "subtitle": "All your previous processes",
+      "position": "Position",
+      "requestDate": "Request date",
+      "closeDate": "Close date",
+      "time": "Time",
+      "hired": "Hired",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "subtitle": "Global platform overview",
+      "registeredCompanies": "Registered companies",
+      "activeRequests": "Active requests",
+      "candidatePool": "Candidate pool",
+      "activeRecruiters": "Active recruiters",
+      "recentRequests": "Recent requests",
+      "metrics": "Metrics",
+      "avgHireTime": "Average hire time",
+      "successRate": "Success rate",
+      "monthlyRequests": "Requests this month"
+    },
+    "companies": {
+      "title": "Companies",
+      "subtitle": "Manage registered companies",
+      "industry": "Industry",
+      "location": "Location",
+      "users": "Users",
+      "requests": "Requests",
+      "active": "Active"
+    },
+    "requests": {
+      "title": "Requests",
+      "subtitle": "All company requests",
+      "company": "Company",
+      "position": "Position",
+      "date": "Date",
+      "recruiter": "Recruiter",
+      "candidates": "Candidates",
+      "unassigned": "Unassigned",
+      "reviewing": "Reviewing",
+      "searching": "Active search",
+      "candidatesSent": "Candidates sent"
+    },
+    "recruiters": {
+      "title": "Recruiters",
+      "subtitle": "Internal recruitment team",
+      "specialty": "Specialty",
+      "active": "Active",
+      "completed": "Completed"
+    },
+    "candidates": {
+      "title": "Candidates",
+      "subtitle": "Platform candidate pool",
+      "specialty": "Specialty",
+      "experience": "Experience",
+      "rating": "Rating",
+      "available": "Available",
+      "inProcess": "In process",
+      "hired": "Hired"
+    },
+    "history": {
+      "title": "History",
+      "subtitle": "Complete platform history",
+      "comingSoon": "Coming soon — complete history table"
+    },
+    "settings": {
+      "title": "Settings",
+      "subtitle": "System settings",
+      "comingSoon": "Coming soon — SLA, times, notifications settings"
+    }
+  },
+  "candidato": {
+    "dashboard": {
+      "welcome": "Welcome",
+      "subtitle": "Summary of your application processes",
+      "activeApplications": "Active applications",
+      "pendingInterviews": "Pending interviews",
+      "availableOpportunities": "Available opportunities",
+      "upcomingInterviews": "Upcoming interviews",
+      "recentUpdates": "Recent updates"
+    },
+    "profile": {
+      "title": "My Profile",
+      "personalInfo": "Personal information",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "experience": "Professional experience",
+      "experiencePlaceholder": "Describe your experience...",
+      "skills": "Skills",
+      "skillsPlaceholder": "E.g.: React, Node.js, TypeScript...",
+      "save": "Save changes"
+    },
+    "opportunities": {
+      "title": "Available opportunities",
+      "apply": "Apply"
+    },
+    "applications": {
+      "title": "My applications",
+      "company": "Company",
+      "position": "Position",
+      "date": "Date",
+      "sent": "Sent",
+      "reviewed": "Reviewed",
+      "shortlisted": "Shortlisted",
+      "interviewed": "Interviewed"
+    },
+    "interviews": {
+      "title": "Interviews",
+      "virtual": "Virtual",
+      "presential": "In-person"
+    },
+    "documents": {
+      "title": "Documents",
+      "upload": "Drag files here or click to upload",
+      "uploaded": "Uploaded on",
+      "update": "Update",
+      "uploadNew": "Upload new document",
+      "uploading": "Uploading...",
+      "formatInfo": "Accepted formats: PDF, JPG, PNG. Maximum size: 5MB"
+    },
+    "notifications": {
+      "title": "Notifications"
     }
   }
 }

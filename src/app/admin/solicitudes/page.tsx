@@ -1,3 +1,7 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
+import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 
 const requests = [
@@ -12,44 +16,46 @@ const statusColors: Record<string, string> = {
   candidates_sent: 'bg-green-100 text-green-700',
 }
 
-const statusLabels: Record<string, string> = {
-  reviewing: 'En revisión',
-  searching: 'Búsqueda activa',
-  candidates_sent: 'Candidatos enviados',
-}
-
 export default function SolicitudesPage() {
+  const t = useTranslations('admin.requests')
+
+  const statusLabels: Record<string, string> = {
+    reviewing: t('reviewing'),
+    searching: t('searching'),
+    candidates_sent: t('candidatesSent'),
+  }
+
+  const columns = [
+    { key: 'company', header: t('company') },
+    { key: 'title', header: t('position') },
+    { key: 'date', header: t('date') },
+    {
+      key: 'recruiter',
+      header: t('recruiter'),
+      render: (item: any) => item.recruiter || t('unassigned'),
+    },
+    { key: 'candidates', header: t('candidates') },
+    {
+      key: 'status',
+      header: t('status'),
+      render: (item: any) => (
+        <Badge className={statusColors[item.status]}>{statusLabels[item.status]}</Badge>
+      ),
+    },
+  ]
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Solicitudes</h1>
-        <p className="text-slate-600">Todas las solicitudes de las empresas</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-600">{t('subtitle')}</p>
       </div>
-      <div className="bg-white rounded-lg border overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Empresa</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Cargo</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Fecha</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Reclutador</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Candidatos</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requests.map((req) => (
-              <tr key={req.id} className="border-t hover:bg-slate-50 cursor-pointer">
-                <td className="p-4 font-medium text-slate-900">{req.company}</td>
-                <td className="p-4 text-sm text-slate-600">{req.title}</td>
-                <td className="p-4 text-sm text-slate-600">{req.date}</td>
-                <td className="p-4 text-sm text-slate-600">{req.recruiter || 'Sin asignar'}</td>
-                <td className="p-4 text-sm text-slate-600">{req.candidates}</td>
-                <td className="p-4"><Badge className={statusColors[req.status]}>{statusLabels[req.status]}</Badge></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="bg-white rounded-lg border overflow-hidden p-6">
+        <DataTable
+          data={requests}
+          columns={columns}
+          searchPlaceholder="Buscar solicitud..."
+        />
       </div>
     </div>
   )

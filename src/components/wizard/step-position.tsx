@@ -1,3 +1,6 @@
+'use client'
+
+import { useWizardStore } from '@/hooks/use-wizard'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -9,6 +12,8 @@ import {
 } from '@/components/ui/select'
 
 export function StepPosition() {
+  const { data, updateData } = useWizardStore()
+
   return (
     <div className="space-y-6">
       <div>
@@ -21,21 +26,31 @@ export function StepPosition() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <Label htmlFor="positionName">Nombre del cargo *</Label>
-          <Input id="positionName" placeholder="Ej: Desarrollador Senior" />
+          <Label htmlFor="positionTitle">Nombre del cargo *</Label>
+          <Input 
+            id="positionTitle" 
+            placeholder="Ej: Desarrollador Senior"
+            value={data.positionTitle}
+            onChange={(e) => updateData({ positionTitle: e.target.value })}
+          />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="positionCount">Cantidad de personas *</Label>
+          <Label htmlFor="positionsCount">Cantidad de personas *</Label>
           <Input
-            id="positionCount"
+            id="positionsCount"
             type="number"
             placeholder="1"
             min="1"
+            value={data.positionsCount}
+            onChange={(e) => updateData({ positionsCount: Number(e.target.value) })}
           />
         </div>
         <div className="space-y-2">
           <Label>Área *</Label>
-          <Select>
+          <Select 
+            value={data.area} 
+            onValueChange={(value) => value && updateData({ area: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
@@ -49,7 +64,10 @@ export function StepPosition() {
         </div>
         <div className="space-y-2">
           <Label>Nivel de experiencia *</Label>
-          <Select>
+          <Select 
+            value={data.experienceLevel} 
+            onValueChange={(value) => value && updateData({ experienceLevel: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
@@ -63,7 +81,10 @@ export function StepPosition() {
         </div>
         <div className="space-y-2">
           <Label>Tipo de posición *</Label>
-          <Select>
+          <Select 
+            value={data.positionType} 
+            onValueChange={(value) => value && updateData({ positionType: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
@@ -76,7 +97,10 @@ export function StepPosition() {
         </div>
         <div className="space-y-2">
           <Label>Modalidad de trabajo *</Label>
-          <Select>
+          <Select 
+            value={data.workMode} 
+            onValueChange={(value) => value && updateData({ workMode: value })}
+          >
             <SelectTrigger>
               <SelectValue placeholder="Seleccionar" />
             </SelectTrigger>
@@ -89,11 +113,21 @@ export function StepPosition() {
         </div>
         <div className="space-y-2">
           <Label htmlFor="positionLocation">Ubicación</Label>
-          <Input id="positionLocation" placeholder="Ciudad, País" />
+          <Input 
+            id="positionLocation" 
+            placeholder="Ciudad, País"
+            value={data.positionLocation}
+            onChange={(e) => updateData({ positionLocation: e.target.value })}
+          />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="positionStartDate">Fecha estimada de inicio</Label>
-          <Input id="positionStartDate" type="date" />
+          <Label htmlFor="startDate">Fecha estimada de inicio</Label>
+          <Input 
+            id="startDate" 
+            type="date"
+            value={data.startDate}
+            onChange={(e) => updateData({ startDate: e.target.value })}
+          />
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
-import { Badge } from '@/components/ui/badge'
+'use client'
+
+import { useTranslations } from 'next-intl'
 
 const recruiters = [
   { name: 'María García', email: 'maria@recluter.com', specialty: 'Tecnología', active: 5, completed: 12 },
@@ -7,11 +9,13 @@ const recruiters = [
 ]
 
 export default function ReclutadoresPage() {
+  const t = useTranslations('admin.recruiters')
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Reclutadores</h1>
-        <p className="text-slate-600">Equipo interno de reclutamiento</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-600">{t('subtitle')}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {recruiters.map((recruiter) => (
@@ -26,9 +30,9 @@ export default function ReclutadoresPage() {
               </div>
             </div>
             <div className="space-y-2 text-sm">
-              <div className="flex justify-between"><span className="text-slate-600">Especialidad:</span><span>{recruiter.specialty}</span></div>
-              <div className="flex justify-between"><span className="text-slate-600">Activos:</span><span className="font-medium">{recruiter.active}</span></div>
-              <div className="flex justify-between"><span className="text-slate-600">Completados:</span><span className="font-medium">{recruiter.completed}</span></div>
+              <div className="flex justify-between"><span className="text-slate-600">{t('specialty')}:</span><span>{recruiter.specialty}</span></div>
+              <div className="flex justify-between"><span className="text-slate-600">{t('active')}:</span><span className="font-medium">{recruiter.active}</span></div>
+              <div className="flex justify-between"><span className="text-slate-600">{t('completed')}:</span><span className="font-medium">{recruiter.completed}</span></div>
             </div>
           </div>
         ))}

@@ -12,7 +12,25 @@
     "noResults": "No se encontraron resultados",
     "error": "Ocurrió un error",
     "delete": "Eliminar",
-    "edit": "Editar"
+    "edit": "Editar",
+    "view": "Ver",
+    "create": "Crear",
+    "update": "Actualizar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "actions": "Acciones",
+    "status": "Estado",
+    "date": "Fecha",
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "description": "Descripción",
+    "all": "Todos",
+    "none": "Ninguno",
+    "pending": "Pendiente",
+    "active": "Activo",
+    "inactive": "Inactivo"
   },
   "nav": {
     "home": "Inicio",
@@ -25,7 +43,11 @@
     "dashboard": "Panel",
     "jobs": "Empleos",
     "candidates": "Candidatos",
-    "settings": "Configuración"
+    "settings": "Configuración",
+    "profile": "Mi perfil",
+    "notifications": "Notificaciones",
+    "history": "Historial",
+    "logout": "Cerrar sesión"
   },
   "landing": {
     "hero": {
@@ -117,22 +139,30 @@
   },
   "auth": {
     "roleSelection": {
-      "title": "¿Cómo querés usar la plataforma?",
+      "title": "Bienvenido a Recluter",
+      "subtitle": "¿Cómo querés usar la plataforma?",
       "company": "Soy empresa",
-      "companyDesc": "Necesito contratar personal",
+      "companyDesc": "Necesito contratar personal para mi equipo",
+      "companyAction": "Crear solicitud de personal →",
       "candidate": "Busco oportunidades laborales",
-      "candidateDesc": "Quiero encontrar trabajo"
+      "candidateDesc": "Quiero encontrar trabajo en empresas de Estados Unidos",
+      "candidateAction": "Explorar oportunidades →",
+      "note": "Podés cambiar tu perfil más adelante desde la configuración"
     }
   },
   "empresa": {
     "dashboard": {
       "welcome": "Bienvenido",
       "subtitle": "Resumen de tus procesos de reclutamiento",
-      "activeProcesses": "Procesos activos",
-      "candidatesReceived": "Candidatos recibidos",
-      "pendingInterviews": "Entrevistas pendientes",
       "searchPersonnel": "Buscar personal",
-      "activeProcessesList": "Procesos activos"
+      "totalRequests": "Solicitudes totales",
+      "activeProcesses": "Procesos activos",
+      "openPositions": "Posiciones abiertas",
+      "successRate": "Tasa de éxito",
+      "recentRequests": "Solicitudes recientes",
+      "viewAll": "Ver todas",
+      "noRequests": "No hay solicitudes aún",
+      "createFirst": "Crear primera solicitud"
     },
     "wizard": {
       "title": "Nueva solicitud de personal",
@@ -145,18 +175,177 @@
       "companyInfo": "Información de la empresa",
       "companySubtitle": "Datos básicos de la empresa para la solicitud",
       "position": "Posición requerida",
+      "positionSubtitle": "Detalles del puesto que necesitas cubrir",
       "profile": "Perfil del candidato",
+      "profileSubtitle": "Definí las características que debe tener la persona",
       "conditions": "Condiciones laborales",
+      "conditionsSubtitle": "Definí las condiciones de la posición",
       "selection": "Proceso de selección",
+      "selectionSubtitle": "Definí cómo querés que sea el proceso",
       "review": "Revisión y confirmación",
+      "reviewSubtitle": "Revisá la información antes de enviar la solicitud",
       "fields": {
         "companyName": "Nombre de la empresa *",
         "industry": "Industria *",
         "location": "Ubicación *",
         "contactName": "Persona de contacto *",
         "contactRole": "Cargo *",
-        "contactEmail": "Email corporativo *"
+        "contactEmail": "Email corporativo *",
+        "positionTitle": "Nombre del cargo *",
+        "positionsCount": "Cantidad de personas *",
+        "area": "Área *",
+        "experienceLevel": "Nivel de experiencia *",
+        "positionType": "Tipo de posición *",
+        "workMode": "Modalidad de trabajo *",
+        "minExperience": "Experiencia mínima (años) *",
+        "englishLevel": "Nivel de inglés *",
+        "technicalSkills": "Conocimientos técnicos *",
+        "softSkills": "Habilidades blandas",
+        "salaryMin": "Rango salarial mínimo",
+        "salaryMax": "Rango salarial máximo",
+        "currency": "Moneda",
+        "candidatesCount": "Cantidad de candidatos a recibir *",
+        "interviewCount": "Número de entrevistas"
       }
+    },
+    "processes": {
+      "title": "Mis procesos",
+      "subtitle": "Seguimiento de todas tus solicitudes de personal",
+      "noProcesses": "No hay procesos activos"
+    },
+    "candidates": {
+      "title": "Candidatos",
+      "subtitle": "Candidatos asociados a tus procesos de selección"
+    },
+    "history": {
+      "title": "Historial",
+      "subtitle": "Todos tus procesos anteriores",
+      "position": "Cargo",
+      "requestDate": "Fecha solicitud",
+      "closeDate": "Fecha cierre",
+      "time": "Tiempo",
+      "hired": "Contratado",
+      "closed": "Cerrado",
+      "cancelled": "Cancelado"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard Administrativo",
+      "subtitle": "Vista global de la plataforma",
+      "registeredCompanies": "Empresas registradas",
+      "activeRequests": "Solicitudes activas",
+      "candidatePool": "Candidatos en pool",
+      "activeRecruiters": "Reclutadores activos",
+      "recentRequests": "Solicitudes recientes",
+      "metrics": "Métricas",
+      "avgHireTime": "Tiempo promedio de contratación",
+      "successRate": "Tasa de éxito",
+      "monthlyRequests": "Solicitudes este mes"
+    },
+    "companies": {
+      "title": "Empresas",
+      "subtitle": "Gestión de empresas registradas",
+      "industry": "Industria",
+      "location": "Ubicación",
+      "users": "Usuarios",
+      "requests": "Solicitudes",
+      "active": "Activa"
+    },
+    "requests": {
+      "title": "Solicitudes",
+      "subtitle": "Todas las solicitudes de las empresas",
+      "company": "Empresa",
+      "position": "Cargo",
+      "date": "Fecha",
+      "recruiter": "Reclutador",
+      "candidates": "Candidatos",
+      "unassigned": "Sin asignar",
+      "reviewing": "En revisión",
+      "searching": "Búsqueda activa",
+      "candidatesSent": "Candidatos enviados"
+    },
+    "recruiters": {
+      "title": "Reclutadores",
+      "subtitle": "Equipo interno de reclutamiento",
+      "specialty": "Especialidad",
+      "active": "Activos",
+      "completed": "Completados"
+    },
+    "candidates": {
+      "title": "Candidatos",
+      "subtitle": "Pool de candidatos de la plataforma",
+      "specialty": "Especialidad",
+      "experience": "Experiencia",
+      "rating": "Rating",
+      "available": "Disponible",
+      "inProcess": "En proceso",
+      "hired": "Contratado"
+    },
+    "history": {
+      "title": "Historial",
+      "subtitle": "Historial completo de la plataforma",
+      "comingSoon": "Próximamente — tabla de historial completo"
+    },
+    "settings": {
+      "title": "Configuración",
+      "subtitle": "Configuración del sistema",
+      "comingSoon": "Próximamente — configuración de SLA, tiempos, notificaciones"
+    }
+  },
+  "candidato": {
+    "dashboard": {
+      "welcome": "Bienvenido",
+      "subtitle": "Resumen de tus procesos de postulación",
+      "activeApplications": "Postulaciones activas",
+      "pendingInterviews": "Entrevistas pendientes",
+      "availableOpportunities": "Oportunidades disponibles",
+      "upcomingInterviews": "Próximas entrevistas",
+      "recentUpdates": "Últimas actualizaciones"
+    },
+    "profile": {
+      "title": "Mi perfil",
+      "personalInfo": "Información personal",
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Email",
+      "phone": "Teléfono",
+      "experience": "Experiencia profesional",
+      "experiencePlaceholder": "Describí tu experiencia...",
+      "skills": "Habilidades",
+      "skillsPlaceholder": "Ej: React, Node.js, TypeScript...",
+      "save": "Guardar cambios"
+    },
+    "opportunities": {
+      "title": "Oportunidades disponibles",
+      "apply": "Postularme"
+    },
+    "applications": {
+      "title": "Mis postulaciones",
+      "company": "Empresa",
+      "position": "Cargo",
+      "date": "Fecha",
+      "sent": "Enviada",
+      "reviewed": "Revisada",
+      "shortlisted": "Preseleccionado",
+      "interviewed": "Entrevistado"
+    },
+    "interviews": {
+      "title": "Entrevistas",
+      "virtual": "Virtual",
+      "presential": "Presencial"
+    },
+    "documents": {
+      "title": "Documentos",
+      "upload": "Arrastrá archivos aquí o hacé click para subir",
+      "uploaded": "Subido el",
+      "update": "Actualizar",
+      "uploadNew": "Subir nuevo documento",
+      "uploading": "Subiendo...",
+      "formatInfo": "Formatos aceptados: PDF, JPG, PNG. Tamaño máximo: 5MB"
+    },
+    "notifications": {
+      "title": "Notificaciones"
     }
   }
 }

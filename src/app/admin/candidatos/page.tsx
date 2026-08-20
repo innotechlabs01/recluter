@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 
 const candidates = [
@@ -13,29 +16,31 @@ const statusColors: Record<string, string> = {
   hired: 'bg-slate-100 text-slate-700',
 }
 
-const statusLabels: Record<string, string> = {
-  available: 'Disponible',
-  in_process: 'En proceso',
-  hired: 'Contratado',
-}
-
 export default function CandidatosPage() {
+  const t = useTranslations('admin.candidates')
+
+  const statusLabels: Record<string, string> = {
+    available: t('available'),
+    in_process: t('inProcess'),
+    hired: t('hired'),
+  }
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Candidatos</h1>
-        <p className="text-slate-600">Pool de candidatos de la plataforma</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-600">{t('subtitle')}</p>
       </div>
       <div className="bg-white rounded-lg border overflow-hidden">
         <table className="w-full">
           <thead className="bg-slate-50">
             <tr>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Nombre</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Email</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Especialidad</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Experiencia</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Rating</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Estado</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('name')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('email')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('specialty')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('experience')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('rating')}</th>
+              <th className="text-left p-4 text-sm font-medium text-slate-600">{t('status')}</th>
             </tr>
           </thead>
           <tbody>

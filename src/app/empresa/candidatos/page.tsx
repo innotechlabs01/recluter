@@ -1,4 +1,6 @@
-import { CandidateCard } from '@/components/dashboard/candidate-card'
+'use client'
+
+import { useTranslations } from 'next-intl'
 
 const candidates = [
   { name: 'Juan Pérez', experience: '8 años de experiencia', skills: ['React', 'Node.js', 'TypeScript'], status: 'shortlisted' as const },
@@ -8,15 +10,27 @@ const candidates = [
 ]
 
 export default function CandidatosPage() {
+  const t = useTranslations('empresa.candidates')
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Candidatos</h1>
-        <p className="text-slate-600">Candidatos asociados a tus procesos de selección</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-600">{t('subtitle')}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {candidates.map((candidate) => (
-          <CandidateCard key={candidate.name} {...candidate} />
+          <div key={candidate.name} className="bg-white p-4 rounded-lg border">
+            <h3 className="font-semibold text-slate-900">{candidate.name}</h3>
+            <p className="text-sm text-slate-600">{candidate.experience}</p>
+            <div className="flex flex-wrap gap-1 mt-2">
+              {candidate.skills.map((skill) => (
+                <span key={skill} className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
     </div>

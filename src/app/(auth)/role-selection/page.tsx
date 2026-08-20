@@ -2,10 +2,14 @@
 
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { Card, CardContent } from '@/components/ui/card'
+import { Building2, Search } from 'lucide-react'
 
 export default function RoleSelectionPage() {
   const { user } = useUser()
   const router = useRouter()
+  const t = useTranslations('auth.roleSelection')
 
   const selectRole = async (role: 'company' | 'candidate') => {
     await user?.update({ unsafeMetadata: { role } })
@@ -17,27 +21,53 @@ export default function RoleSelectionPage() {
   }
 
   return (
-    <div className="max-w-md w-full space-y-6">
+    <div className="space-y-8">
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-slate-900">¿Cómo querés usar la plataforma?</h1>
-        <p className="text-slate-600 mt-2">Seleccioná tu perfil para continuar</p>
+        <h1 className="text-3xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-500 mt-2">{t('subtitle')}</p>
       </div>
-      <div className="space-y-4">
-        <button
+
+      <div className="grid grid-cols-1 gap-4">
+        <Card 
+          className="cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all group"
           onClick={() => selectRole('company')}
-          className="w-full p-6 text-left border rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
         >
-          <h3 className="font-semibold text-slate-900">Soy empresa</h3>
-          <p className="text-sm text-slate-600">Necesito contratar personal</p>
-        </button>
-        <button
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-blue-100 rounded-xl group-hover:bg-blue-200 transition-colors">
+                <Building2 className="h-6 w-6 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-slate-900 text-lg">{t('company')}</h3>
+                <p className="text-slate-500 mt-1">{t('companyDesc')}</p>
+                <p className="text-sm text-blue-600 mt-3 font-medium">{t('companyAction')}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card 
+          className="cursor-pointer hover:border-green-500 hover:shadow-lg transition-all group"
           onClick={() => selectRole('candidate')}
-          className="w-full p-6 text-left border rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors"
         >
-          <h3 className="font-semibold text-slate-900">Busco oportunidades laborales</h3>
-          <p className="text-sm text-slate-600">Quiero encontrar trabajo</p>
-        </button>
+          <CardContent className="p-6">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-green-100 rounded-xl group-hover:bg-green-200 transition-colors">
+                <Search className="h-6 w-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-slate-900 text-lg">{t('candidate')}</h3>
+                <p className="text-slate-500 mt-1">{t('candidateDesc')}</p>
+                <p className="text-sm text-green-600 mt-3 font-medium">{t('candidateAction')}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
+
+      <p className="text-center text-sm text-slate-500">
+        {t('note')}
+      </p>
     </div>
   )
 }

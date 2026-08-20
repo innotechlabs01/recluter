@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -8,9 +11,11 @@ const opportunities = [
 ]
 
 export default function OportunidadesPage() {
+  const t = useTranslations('candidato.opportunities')
+
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Oportunidades disponibles</h1>
+      <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {opportunities.map((opp, i) => (
           <Card key={i} className="hover:border-blue-300 transition-colors">
@@ -24,7 +29,7 @@ export default function OportunidadesPage() {
               <div className="flex flex-wrap gap-1 mb-4">
                 {opp.skills.map((s) => <Badge key={s} variant="outline" className="text-xs">{s}</Badge>)}
               </div>
-              <Button size="sm" className="w-full">Postularme</Button>
+              <Button size="sm" className="w-full">{t('apply')}</Button>
             </CardContent>
           </Card>
         ))}

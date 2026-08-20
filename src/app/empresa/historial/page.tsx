@@ -1,3 +1,7 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
+import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
@@ -25,44 +29,41 @@ const statusColors: Record<HistoryStatus, string> = {
   cancelled: 'bg-red-100 text-red-700',
 }
 
-const statusLabels = {
-  hired: 'Contratado',
-  closed: 'Cerrado',
-  cancelled: 'Cancelado',
-}
-
 export default function HistorialPage() {
+  const t = useTranslations('empresa.history')
+
+  const statusLabels = {
+    hired: t('hired'),
+    closed: t('closed'),
+    cancelled: t('cancelled'),
+  }
+
+  const columns = [
+    { key: 'title', header: t('position') },
+    { key: 'date', header: t('requestDate') },
+    { key: 'closed', header: t('closeDate') },
+    { key: 'time', header: t('time') },
+    {
+      key: 'status',
+      header: t('status'),
+      render: (item: HistoryItem) => (
+        <Badge className={cn(statusColors[item.status])}>{statusLabels[item.status]}</Badge>
+      ),
+    },
+  ]
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Historial</h1>
-        <p className="text-slate-600">Todos tus procesos anteriores</p>
+        <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+        <p className="text-slate-600">{t('subtitle')}</p>
       </div>
-      <div className="bg-white rounded-lg border overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Cargo</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Fecha solicitud</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Fecha cierre</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Tiempo</th>
-              <th className="text-left p-4 text-sm font-medium text-slate-600">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.map((item) => (
-              <tr key={item.id} className="border-t hover:bg-slate-50 cursor-pointer">
-                <td className="p-4 font-medium text-slate-900">{item.title}</td>
-                <td className="p-4 text-sm text-slate-600">{item.date}</td>
-                <td className="p-4 text-sm text-slate-600">{item.closed}</td>
-                <td className="p-4 text-sm text-slate-600">{item.time}</td>
-                <td className="p-4">
-                  <Badge className={cn(statusColors[item.status])}>{statusLabels[item.status]}</Badge>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="bg-white rounded-lg border overflow-hidden p-6">
+        <DataTable
+          data={history}
+          columns={columns}
+          searchPlaceholder="Buscar en historial..."
+        />
       </div>
     </div>
   )

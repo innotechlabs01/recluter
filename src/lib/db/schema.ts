@@ -208,6 +208,32 @@ export const auditLogs = pgTable('audit_logs', {
   createdAt: timestamp('created_at').defaultNow(),
 })
 
+// ── Interviews ────────────────────────────────────────────────────────────────
+
+export const interviews = pgTable('interviews', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  jobRequestId: uuid('job_request_id').references(() => jobRequests.id),
+  candidateId: uuid('candidate_id').references(() => candidates.id),
+  scheduledAt: timestamp('scheduled_at'),
+  duration: integer('duration'), // minutes
+  type: text('type'), // virtual, presential
+  meetingLink: text('meeting_link'),
+  status: text('status').default('scheduled'), // scheduled, completed, cancelled
+  notes: text('notes'),
+  createdAt: timestamp('created_at').defaultNow(),
+})
+
+// ── Documents ──────────────────────────────────────────────────────────────────
+
+export const documents = pgTable('documents', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  candidateId: uuid('candidate_id').references(() => candidates.id),
+  filename: text('filename').notNull(),
+  url: text('url').notNull(),
+  type: text('type'), // resume, certificate, id
+  uploadedAt: timestamp('uploaded_at').defaultNow(),
+})
+
 // ── System Config ──────────────────────────────────────────────────────────────
 
 export const systemConfig = pgTable('system_config', {

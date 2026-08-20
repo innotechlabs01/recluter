@@ -1,11 +1,8 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
-
-const processes = [
-  { id: '1', title: 'Desarrollador Senior', status: 'searching', recruiter: 'María García', date: '18 Ago 2026', candidates: 5 },
-  { id: '2', title: 'Account Manager', status: 'candidates_sent', recruiter: 'Carlos López', date: '15 Ago 2026', candidates: 3 },
-  { id: '3', title: 'Designer UX', status: 'reviewing', recruiter: null, date: '20 Ago 2026', candidates: 0 },
-]
 
 const statusColors: Record<string, string> = {
   received: 'bg-slate-100 text-slate-700',
@@ -28,6 +25,37 @@ const statusLabels: Record<string, string> = {
 }
 
 export function ProcessList() {
+  const [processes, setProcesses] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/solicitudes')
+      .then(res => res.json())
+      .then(data => {
+        setProcesses(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-24 bg-slate-100 rounded-lg animate-pulse" />
+        ))}
+      </div>
+    )
+  }
+
+  if (processes.length === 0) {
+    return (
+      <div className="text-center py-8 text-slate-500">
+        No hay procesos activos
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-4">
       {processes.map((process) => (
@@ -37,16 +65,12 @@ export function ProcessList() {
               <div>
                 <h3 className="font-semibold text-slate-900">{process.title}</h3>
                 <p className="text-sm text-slate-600 mt-1">
-                  {process.recruiter ? `Reclutador: ${process.recruiter}` : 'Sin reclutador asignado'}
+                  {process.positionsCount} posiciones{process.location ? ` • ${process.location}` : ''}
                 </p>
-                <p className="text-xs text-slate-500 mt-1">Solicitud: {process.date}</p>
               </div>
-              <div className="flex items-center gap-3">
-                {process.candidates > 0 && (
-                  <span className="text-sm text-slate-600">{process.candidates} candidatos</span>
-                )}
-                <Badge className={statusColors[process.status]}>{statusLabels[process.status]}</Badge>
-              </div>
+              <Badge className={statusColors[process.status || 'received'] || statusColors.received}>
+                {statusLabels[process.status || 'received'] || process.status}
+              </Badge>
             </div>
           </div>
         </Link>
