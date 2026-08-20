@@ -243,3 +243,26 @@ export const systemConfig = pgTable('system_config', {
   description: text('description'),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
+
+// ── Testimonials ────────────────────────────────────────────────────────────────
+
+export const testimonialStatusEnum = pgEnum('testimonial_status', [
+  'pending',
+  'approved',
+  'rejected',
+])
+
+export const testimonials = pgTable('testimonials', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  companyId: uuid('company_id').references(() => companies.id),
+  jobRequestId: uuid('job_request_id').references(() => jobRequests.id),
+  authorName: text('author_name').notNull(),
+  authorRole: text('author_role'),
+  companyName: text('company_name').notNull(),
+  quote: text('quote').notNull(),
+  rating: integer('rating').notNull(),
+  status: testimonialStatusEnum('status').default('pending'),
+  token: text('token').unique().notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+  reviewedAt: timestamp('reviewed_at'),
+})
