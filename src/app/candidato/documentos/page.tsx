@@ -1,6 +1,5 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useState, useRef } from 'react'
@@ -15,9 +14,6 @@ interface Document {
 }
 
 export default function DocumentosPage() {
-  const t = useTranslations('candidato.documents')
-  const tc = useTranslations('common')
-
   const [documents, setDocuments] = useState<Document[]>([
     {
       id: '1',
@@ -71,14 +67,14 @@ export default function DocumentosPage() {
   }
 
   const handleDelete = (id: string) => {
-    if (confirm(tc('confirm'))) {
+    if (confirm('¿Eliminar este archivo?')) {
       setDocuments((prev) => prev.filter((doc) => doc.id !== id))
     }
   }
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">{t('title')}</h1>
+      <h1 className="text-2xl font-bold text-slate-900">Documentos</h1>
 
       <Card>
         <CardContent className="pt-6">
@@ -93,7 +89,7 @@ export default function DocumentosPage() {
                   <div>
                     <p className="font-medium text-slate-900">{doc.filename}</p>
                     <p className="text-xs text-slate-500">
-                      {t('uploaded')} {doc.uploadedAt}
+                      Subido el {doc.uploadedAt}
                     </p>
                   </div>
                 </div>
@@ -104,7 +100,7 @@ export default function DocumentosPage() {
                     rel="noopener noreferrer"
                   >
                     <Button variant="outline" size="sm">
-                      {tc('view')}
+                      Ver
                     </Button>
                   </a>
                   <Button
@@ -135,10 +131,10 @@ export default function DocumentosPage() {
               disabled={uploading}
             >
               <Upload className="h-4 w-4 mr-2" />
-              {uploading ? t('uploading') : t('uploadNew')}
+              {uploading ? 'Subiendo...' : 'Subir nuevo documento'}
             </Button>
             <p className="text-xs text-slate-500 mt-2 text-center">
-              {t('formatInfo')}
+              Formatos aceptados: PDF, JPG, PNG. Tamaño máximo: 5MB
             </p>
           </div>
         </CardContent>

@@ -2,14 +2,12 @@
 
 import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 import { Card, CardContent } from '@/components/ui/card'
 import { Building2, Search } from 'lucide-react'
 
 export default function RoleSelectionPage() {
   const { user } = useUser()
   const router = useRouter()
-  const t = useTranslations('auth.roleSelection')
 
   const selectRole = async (role: 'company' | 'candidate') => {
     await user?.update({ unsafeMetadata: { role } })
@@ -23,8 +21,8 @@ export default function RoleSelectionPage() {
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-slate-900">{t('title')}</h1>
-        <p className="text-slate-500 mt-2">{t('subtitle')}</p>
+        <h1 className="text-3xl font-bold text-slate-900">Bienvenido a Recluter</h1>
+        <p className="text-slate-500 mt-2">¿Cómo querés usar la plataforma?</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
@@ -38,9 +36,9 @@ export default function RoleSelectionPage() {
                 <Building2 className="h-6 w-6 text-blue-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900 text-lg">{t('company')}</h3>
-                <p className="text-slate-500 mt-1">{t('companyDesc')}</p>
-                <p className="text-sm text-blue-600 mt-3 font-medium">{t('companyAction')}</p>
+                <h3 className="font-semibold text-slate-900 text-lg">Soy empresa</h3>
+                <p className="text-slate-500 mt-1">Necesito contratar personal para mi equipo</p>
+                <p className="text-sm text-blue-600 mt-3 font-medium">Crear solicitud de personal →</p>
               </div>
             </div>
           </CardContent>
@@ -56,9 +54,9 @@ export default function RoleSelectionPage() {
                 <Search className="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-900 text-lg">{t('candidate')}</h3>
-                <p className="text-slate-500 mt-1">{t('candidateDesc')}</p>
-                <p className="text-sm text-green-600 mt-3 font-medium">{t('candidateAction')}</p>
+                <h3 className="font-semibold text-slate-900 text-lg">Busco oportunidades laborales</h3>
+                <p className="text-slate-500 mt-1">Quiero encontrar trabajo en empresas de Estados Unidos</p>
+                <p className="text-sm text-green-600 mt-3 font-medium">Explorar oportunidades →</p>
               </div>
             </div>
           </CardContent>
@@ -66,7 +64,7 @@ export default function RoleSelectionPage() {
       </div>
 
       <p className="text-center text-sm text-slate-500">
-        {t('note')}
+        Podés cambiar tu perfil más adelante desde la configuración
       </p>
     </div>
   )

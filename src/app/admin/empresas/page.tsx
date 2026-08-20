@@ -1,5 +1,6 @@
 'use client'
 
+
 import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'

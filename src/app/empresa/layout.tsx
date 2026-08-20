@@ -1,14 +1,11 @@
 'use client'
 
 import { SharedSidebar } from '@/components/layout/shared-sidebar'
-import { NextIntlClientProvider } from 'next-intl'
-import { useMessages } from 'next-intl'
+import { NextIntlProvider } from '@/components/providers/next-intl-provider'
 
 export default function EmpresaLayout({ children }: { children: React.ReactNode }) {
-  const messages = useMessages()
-
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlProvider>
       <div className="flex min-h-screen bg-slate-50">
         <SharedSidebar
           role="empresa"
@@ -23,6 +20,6 @@ export default function EmpresaLayout({ children }: { children: React.ReactNode 
           <div className="p-8">{children}</div>
         </main>
       </div>
-    </NextIntlClientProvider>
+    </NextIntlProvider>
   )
 }

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 
+
 const candidates = [
   { name: 'Juan Pérez', email: 'juan@email.com', specialty: 'Desarrollo Full Stack', experience: '5 años', status: 'available', rating: 4.5 },
   { name: 'Laura Sánchez', email: 'laura@email.com', specialty: 'Marketing Digital', experience: '3 años', status: 'in_process', rating: 4.2 },
