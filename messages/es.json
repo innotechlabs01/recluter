@@ -135,6 +135,10 @@
       "email": "Email",
       "message": "Mensaje",
       "send": "Enviar mensaje"
+    },
+    "testimonials": {
+      "title": "Lo que dicen nuestros clientes",
+      "subtitle": "Empresas que ya confiaron en nosotros"
     }
   },
   "auth": {
