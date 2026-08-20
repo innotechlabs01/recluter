@@ -10,7 +10,7 @@ export function Contact() {
   const t = useTranslations('landing.contact')
 
   return (
-    <section className="py-20">
+    <section id="contacto" className="py-20">
       <div className="container mx-auto px-4 max-w-2xl">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-4">{t('title')}</h2>
         <p className="text-center text-slate-600 mb-8">{t('subtitle')}</p>

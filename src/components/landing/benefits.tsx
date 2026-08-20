@@ -11,7 +11,7 @@ export function Benefits() {
   }))
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section id="beneficios" className="py-20 bg-slate-50">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-slate-900 mb-4">{t('title')}</h2>
         <p className="text-center text-slate-600 mb-12">{t('subtitle')}</p>

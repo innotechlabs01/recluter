@@ -22,11 +22,11 @@ export function Hero() {
               {t('cta')}
             </Button>
           </Link>
-          <Link href="/como-funciona">
+          <a href="#como-funciona">
             <Button variant="outline" size="lg" className="w-full sm:w-auto">
               {t('secondary')}
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

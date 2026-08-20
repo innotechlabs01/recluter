@@ -14,18 +14,18 @@ export function Header() {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Logo />
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/como-funciona" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+          <a href="#como-funciona" className="text-sm font-medium text-slate-600 hover:text-slate-900">
             {t('howItWorks')}
-          </Link>
-          <Link href="/beneficios" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+          </a>
+          <a href="#beneficios" className="text-sm font-medium text-slate-600 hover:text-slate-900">
             {t('benefits')}
-          </Link>
-          <Link href="/faq" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+          </a>
+          <a href="#faq" className="text-sm font-medium text-slate-600 hover:text-slate-900">
             {t('faq')}
-          </Link>
-          <Link href="/contacto" className="text-sm font-medium text-slate-600 hover:text-slate-900">
+          </a>
+          <a href="#contacto" className="text-sm font-medium text-slate-600 hover:text-slate-900">
             {t('contact')}
-          </Link>
+          </a>
         </nav>
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
