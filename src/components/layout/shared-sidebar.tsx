@@ -20,6 +20,7 @@ import {
   Calendar,
   BriefcaseIcon,
   FolderOpen,
+  MessageSquare,
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -56,6 +57,7 @@ const navigationConfig = {
       { name: 'Candidatos', href: '/admin/candidatos', icon: Users },
       { name: 'Reclutadores', href: '/admin/reclutadores', icon: UserSearch },
       { name: 'Historial', href: '/admin/historial', icon: History },
+      { name: 'Testimonios', href: '/admin/testimonios', icon: MessageSquare },
     ],
     bottomItems: [
       { name: 'Configuración', href: '/admin/configuracion', icon: Settings },
