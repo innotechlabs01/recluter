@@ -1,7 +1,12 @@
 import { Logo } from '@/components/shared/logo'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default async function AuthLayout({ children }: { children: React.ReactNode }) {
+  const messages = await getMessages()
+
   return (
+    <NextIntlClientProvider messages={messages}>
     <div className="min-h-screen flex">
       {/* Left side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
@@ -35,5 +40,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
       </div>
     </div>
+    </NextIntlClientProvider>
   )
 }
