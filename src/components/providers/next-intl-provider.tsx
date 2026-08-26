@@ -1,7 +1,7 @@
 'use client'
 
 import { NextIntlClientProvider } from 'next-intl'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 
 const defaultMessages = {
   nav: {
@@ -201,22 +201,12 @@ const defaultMessages = {
 
 interface NextIntlProviderProps {
   children: ReactNode
+  locale?: string
 }
 
-export function NextIntlProvider({ children }: NextIntlProviderProps) {
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // During SSR/prerendering, render children without the provider
-  if (!mounted) {
-    return <>{children}</>
-  }
-
+export function NextIntlProvider({ children, locale = 'es' }: NextIntlProviderProps) {
   return (
-    <NextIntlClientProvider messages={defaultMessages}>
+    <NextIntlClientProvider messages={defaultMessages} locale={locale}>
       {children}
     </NextIntlClientProvider>
   )

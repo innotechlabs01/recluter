@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useClerk } from '@clerk/nextjs'
 import { Logo } from '@/components/shared/logo'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
@@ -81,6 +82,7 @@ const navigationConfig = {
 
 export function SharedSidebar({ role, user, notificationCount = 0 }: SidebarProps) {
   const pathname = usePathname()
+  const { signOut } = useClerk()
   const config = navigationConfig[role]
 
   return (
@@ -138,7 +140,7 @@ export function SharedSidebar({ role, user, notificationCount = 0 }: SidebarProp
                 <p className="text-sm font-medium text-white truncate">{user.name}</p>
                 <p className="text-xs text-slate-400 truncate">{user.email}</p>
               </div>
-              <button className="text-slate-400 hover:text-white">
+              <button onClick={() => signOut({ redirectUrl: '/' })} className="text-slate-400 hover:text-white">
                 <LogOut className="h-4 w-4" />
               </button>
             </div>

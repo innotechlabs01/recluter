@@ -1,18 +1,21 @@
 'use client'
 
 import { SharedSidebar } from '@/components/layout/shared-sidebar'
+import { useUser } from '@clerk/nextjs'
 import { NextIntlProvider } from '@/components/providers/next-intl-provider'
 
 export default function EmpresaLayout({ children }: { children: React.ReactNode }) {
+  const { user } = useUser()
+
   return (
     <NextIntlProvider>
       <div className="flex min-h-screen bg-slate-50">
         <SharedSidebar
           role="empresa"
           user={{
-            name: 'Acme Corp',
-            email: 'admin@acme.com',
-            initials: 'AC',
+            name: user?.fullName || 'Empresa',
+            email: user?.emailAddresses?.[0]?.emailAddress || '',
+            initials: user?.firstName?.[0] || 'E',
           }}
           notificationCount={3}
         />

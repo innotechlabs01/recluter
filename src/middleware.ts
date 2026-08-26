@@ -25,11 +25,10 @@ export default clerkMiddleware(async (auth, req) => {
   await auth.protect()
 
   // Role-based redirect after auth
-  const { userId, sessionClaims } = await auth()
-  
-  if (userId) {
-    const role = (sessionClaims?.unsafeMetadata as any)?.role as string | undefined
-    
+  // Read role from cookie (JWT doesn't include unsafeMetadata by default in Clerk)
+  const role = req.cookies.get('user_role')?.value as string | undefined
+
+  if (role) {
     // If user is on wrong portal, redirect to correct one
     if (isAdminRoute(req) && role !== 'admin') {
       const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'candidate' ? '/candidato/dashboard' : '/role-selection'
@@ -44,6 +43,11 @@ export default clerkMiddleware(async (auth, req) => {
     if (isCandidatoRoute(req) && role !== 'candidate') {
       const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'admin' ? '/admin/dashboard' : '/role-selection'
       return Response.redirect(new URL(redirectTo, req.url))
+    }
+  } else {
+    // No role cookie set yet — redirect to role selection
+    if (isEmpresaRoute(req) || isAdminRoute(req) || isCandidatoRoute(req)) {
+      return Response.redirect(new URL('/role-selection', req.url))
     }
   }
 })

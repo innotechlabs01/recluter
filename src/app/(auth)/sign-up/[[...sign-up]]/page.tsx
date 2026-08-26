@@ -5,7 +5,7 @@ export default function SignUpPage() {
     <SignUp
       path="/sign-up"
       signInUrl="/sign-in"
-      fallbackRedirectUrl="/role-selection"
+      forceRedirectUrl="/role-selection"
     />
   )
 }
