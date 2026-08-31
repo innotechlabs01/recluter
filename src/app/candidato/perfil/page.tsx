@@ -7,29 +7,46 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { candidateProfileSchema, type CandidateProfileInput } from '@/lib/validations/profile'
 
 export default function PerfilPage() {
   const { user, isLoaded } = useUser()
   const [saving, setSaving] = useState(false)
-  const [formData, setFormData] = useState({
-    firstName: user?.firstName || '',
-    lastName: user?.lastName || '',
-    phone: user?.phoneNumbers?.[0]?.phoneNumber || '',
-    experience: '',
-    skills: '',
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CandidateProfileInput>({
+    resolver: zodResolver(candidateProfileSchema),
+    defaultValues: {
+      firstName: user?.firstName || '',
+      lastName: user?.lastName || '',
+      phone: user?.phoneNumbers?.[0]?.phoneNumber || '',
+      experience: '',
+      skills: '',
+    },
   })
 
-  const handleSave = async () => {
+  const onSubmit = async (values: CandidateProfileInput) => {
     setSaving(true)
+    setMessage(null)
     try {
-      await fetch('/api/candidato/profile', {
+      const response = await fetch('/api/candidato/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(values),
       })
-      alert('Perfil guardado correctamente')
+      if (response.ok) {
+        setMessage({ type: 'success', text: 'Perfil guardado correctamente' })
+      } else {
+        setMessage({ type: 'error', text: 'No se pudo guardar el perfil. Intentá de nuevo.' })
+      }
     } catch {
-      alert('Error al guardar el perfil')
+      setMessage({ type: 'error', text: 'Error al guardar el perfil' })
     } finally {
       setSaving(false)
     }
@@ -51,54 +68,67 @@ export default function PerfilPage() {
         <CardHeader>
           <CardTitle>Información personal</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName">Nombre</Label>
+                <Input id="firstName" {...register('firstName')} />
+                {errors.firstName && (
+                  <p className="text-xs text-red-600">{errors.firstName.message}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName">Apellido</Label>
+                <Input id="lastName" {...register('lastName')} />
+                {errors.lastName && (
+                  <p className="text-xs text-red-600">{errors.lastName.message}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label>Email</Label>
+                <Input defaultValue={user?.emailAddresses?.[0]?.emailAddress || ''} disabled />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Teléfono</Label>
+                <Input id="phone" {...register('phone')} />
+              </div>
+            </div>
             <div className="space-y-2">
-              <Label>Nombre</Label>
-              <Input
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+              <Label htmlFor="experience">Experiencia profesional</Label>
+              <Textarea
+                id="experience"
+                rows={4}
+                placeholder="Describí tu experiencia..."
+                {...register('experience')}
               />
             </div>
             <div className="space-y-2">
-              <Label>Apellido</Label>
+              <Label htmlFor="skills">Habilidades</Label>
               <Input
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                id="skills"
+                placeholder="Ej: React, Node.js, TypeScript..."
+                {...register('skills')}
               />
             </div>
-            <div className="space-y-2">
-              <Label>Email</Label>
-              <Input defaultValue={user?.emailAddresses?.[0]?.emailAddress || ''} disabled />
-            </div>
-            <div className="space-y-2">
-              <Label>Teléfono</Label>
-              <Input
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label>Experiencia profesional</Label>
-            <Textarea
-              rows={4}
-              placeholder="Describí tu experiencia..."
-              value={formData.experience}
-              onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Habilidades</Label>
-            <Input
-              placeholder="Ej: React, Node.js, TypeScript..."
-              value={formData.skills}
-              onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
-            />
-          </div>
-          <Button onClick={handleSave} disabled={saving}>
-            {saving ? 'Guardando...' : 'Guardar cambios'}
-          </Button>
+
+            {message && (
+              <p
+                className={`text-sm p-3 rounded-lg ${
+                  message.type === 'success'
+                    ? 'text-green-700 bg-green-50'
+                    : 'text-red-700 bg-red-50'
+                }`}
+                data-testid="profile-message"
+              >
+                {message.text}
+              </p>
+            )}
+
+            <Button type="submit" disabled={saving}>
+              {saving ? 'Guardando...' : 'Guardar cambios'}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>
