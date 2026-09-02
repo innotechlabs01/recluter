@@ -45,16 +45,24 @@ export async function POST(req: NextRequest) {
     token,
   })
 
-  await resend.emails.send({
-    from: 'Recluter <onboarding@resend.dev>',
-    to: company.contactEmail || 'admin@recluter.com',
-    subject: '¡Compartí tu experiencia con Recluter!',
-    react: TestimonialRequestEmail({
-      authorName: company.contactName || company.name,
-      companyName: company.name,
-      token,
-    }),
-  })
+  if (resend) {
+    try {
+      await resend.emails.send({
+        from: 'Recluter <onboarding@resend.dev>',
+        to: company.contactEmail || 'admin@recluter.com',
+        subject: '¡Compartí tu experiencia con Recluter!',
+        react: TestimonialRequestEmail({
+          authorName: company.contactName || company.name,
+          companyName: company.name,
+          token,
+        }),
+      })
+    } catch (error) {
+      // Don't fail the request if the email fails: the testimonial row is
+      // already created and the token-based flow can still continue.
+      console.error('Failed to send testimonial request email:', error)
+    }
+  }
 
   return NextResponse.json({ success: true })
 }

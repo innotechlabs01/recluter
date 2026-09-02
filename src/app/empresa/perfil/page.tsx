@@ -5,29 +5,46 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { empresaProfileSchema, type EmpresaProfileInput } from '@/lib/validations/profile'
 
 export default function EmpresaPerfilPage() {
   const [saving, setSaving] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    industry: '',
-    location: '',
-    contactName: '',
-    contactEmail: '',
-    contactPhone: '',
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EmpresaProfileInput>({
+    resolver: zodResolver(empresaProfileSchema),
+    defaultValues: {
+      name: '',
+      industry: '',
+      location: '',
+      contactName: '',
+      contactEmail: '',
+      contactPhone: '',
+    },
   })
 
-  const handleSave = async () => {
+  const onSubmit = async (values: EmpresaProfileInput) => {
     setSaving(true)
+    setMessage(null)
     try {
-      await fetch('/api/empresa/profile', {
+      const response = await fetch('/api/empresa/profile', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(values),
       })
-      alert('Perfil actualizado')
+      if (response.ok) {
+        setMessage({ type: 'success', text: 'Perfil actualizado' })
+      } else {
+        setMessage({ type: 'error', text: 'No se pudo guardar el perfil. Intentá de nuevo.' })
+      }
     } catch {
-      alert('Error al guardar el perfil')
+      setMessage({ type: 'error', text: 'Error al guardar el perfil' })
     } finally {
       setSaving(false)
     }
@@ -40,36 +57,55 @@ export default function EmpresaPerfilPage() {
         <CardHeader>
           <CardTitle>Información de la empresa</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Nombre de la empresa</Label>
-              <Input value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Nombre de la empresa</Label>
+                <Input id="name" {...register('name')} />
+                {errors.name && <p className="text-xs text-red-600">{errors.name.message}</p>}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="industry">Industria</Label>
+                <Input id="industry" {...register('industry')} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="location">Ubicación</Label>
+                <Input id="location" {...register('location')} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contactName">Contacto principal</Label>
+                <Input id="contactName" {...register('contactName')} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contactEmail">Email de contacto</Label>
+                <Input id="contactEmail" {...register('contactEmail')} />
+                {errors.contactEmail && (
+                  <p className="text-xs text-red-600">{errors.contactEmail.message}</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contactPhone">Teléfono</Label>
+                <Input id="contactPhone" {...register('contactPhone')} />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label>Industria</Label>
-              <Input value={formData.industry} onChange={(e) => setFormData({ ...formData, industry: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label>Ubicación</Label>
-              <Input value={formData.location} onChange={(e) => setFormData({ ...formData, location: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label>Contacto principal</Label>
-              <Input value={formData.contactName} onChange={(e) => setFormData({ ...formData, contactName: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label>Email de contacto</Label>
-              <Input value={formData.contactEmail} onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })} />
-            </div>
-            <div className="space-y-2">
-              <Label>Teléfono</Label>
-              <Input value={formData.contactPhone} onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })} />
-            </div>
-          </div>
-          <Button onClick={handleSave} disabled={saving}>
-            {saving ? 'Guardando...' : 'Guardar cambios'}
-          </Button>
+
+            {message && (
+              <p
+                className={`text-sm p-3 rounded-lg ${
+                  message.type === 'success'
+                    ? 'text-green-700 bg-green-50'
+                    : 'text-red-700 bg-red-50'
+                }`}
+              >
+                {message.text}
+              </p>
+            )}
+
+            <Button type="submit" disabled={saving}>
+              {saving ? 'Guardando...' : 'Guardar cambios'}
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>

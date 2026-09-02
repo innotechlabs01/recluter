@@ -48,3 +48,58 @@ export const solicitudSchema = z.object({
 })
 
 export type SolicitudInput = z.infer<typeof solicitudSchema>
+
+// ── Per-step schemas ──────────────────────────────────────────────────────────
+// Each wizard step validates only its own fields before allowing "Next".
+// These are derived from `solicitudSchema` so the full-request contract stays
+// the source of truth while the UI can gate step-by-step.
+
+export const solicitudStepSchemas = {
+  1: z.object({
+    companyName: solicitudSchema.shape.companyName,
+    industry: solicitudSchema.shape.industry,
+    location: solicitudSchema.shape.location,
+    contactName: solicitudSchema.shape.contactName,
+    contactRole: solicitudSchema.shape.contactRole,
+    contactEmail: solicitudSchema.shape.contactEmail,
+  }),
+  2: z.object({
+    positionTitle: solicitudSchema.shape.positionTitle,
+    positionsCount: solicitudSchema.shape.positionsCount,
+    area: solicitudSchema.shape.area,
+    experienceLevel: solicitudSchema.shape.experienceLevel,
+    positionType: solicitudSchema.shape.positionType,
+    workMode: solicitudSchema.shape.workMode,
+    positionLocation: solicitudSchema.shape.positionLocation,
+    startDate: solicitudSchema.shape.startDate,
+  }),
+  3: z.object({
+    minExperience: solicitudSchema.shape.minExperience,
+    englishLevel: solicitudSchema.shape.englishLevel,
+    education: solicitudSchema.shape.education,
+    certifications: solicitudSchema.shape.certifications,
+    technicalSkills: solicitudSchema.shape.technicalSkills,
+    softSkills: solicitudSchema.shape.softSkills,
+    mandatoryRequirements: solicitudSchema.shape.mandatoryRequirements,
+    desirableRequirements: solicitudSchema.shape.desirableRequirements,
+  }),
+  4: z.object({
+    salaryMin: solicitudSchema.shape.salaryMin,
+    salaryMax: solicitudSchema.shape.salaryMax,
+    currency: solicitudSchema.shape.currency,
+    contractType: solicitudSchema.shape.contractType,
+    schedule: solicitudSchema.shape.schedule,
+    timezone: solicitudSchema.shape.timezone,
+    benefits: solicitudSchema.shape.benefits,
+    additionalInfo: solicitudSchema.shape.additionalInfo,
+  }),
+  5: z.object({
+    candidatesCount: solicitudSchema.shape.candidatesCount,
+    deadline: solicitudSchema.shape.deadline,
+    interviewCount: solicitudSchema.shape.interviewCount,
+    technicalTests: solicitudSchema.shape.technicalTests,
+    processRequirements: solicitudSchema.shape.processRequirements,
+  }),
+} as const
+
+export type SolicitudStep = keyof typeof solicitudStepSchemas
