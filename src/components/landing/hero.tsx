@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ProcessSlider } from '@/components/landing/process-slider'
@@ -29,11 +30,11 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="/sign-up">
+              <Link href="/sign-up">
                 <Button size="lg" className="w-full sm:w-auto bg-white text-slate-900 hover:bg-blue-50 shadow-lg shadow-blue-500/25">
                   {t('cta')}
                 </Button>
-              </a>
+              </Link>
               <a href="#como-funciona">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                   {t('secondary')}

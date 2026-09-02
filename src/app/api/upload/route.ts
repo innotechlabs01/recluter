@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
   const fileName = `${userId}/${Date.now()}-${file.name}`
 
-  const { data, error } = await supabase.storage
+  const { error } = await supabase.storage
     .from('documents')
     .upload(fileName, file)
 

@@ -17,9 +17,20 @@ const statusLabels: Record<string, string> = {
   closed: 'Cerrada',
 }
 
+interface ProcessDetail {
+  id: string
+  title: string
+  positionsCount: number
+  status: string
+  salaryMin?: number | null
+  salaryMax?: number | null
+  currency?: string | null
+  workMode?: string | null
+}
+
 export default function ProcessDetailPage() {
   const params = useParams()
-  const [process, setProcess] = useState<any>(null)
+  const [process, setProcess] = useState<ProcessDetail | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

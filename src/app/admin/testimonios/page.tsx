@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Check, X, Trash2, Star } from 'lucide-react'
@@ -20,16 +20,27 @@ export default function AdminTestimoniosPage() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchTestimonials()
-  }, [])
-
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     const res = await fetch('/api/admin/testimonials')
     const data = await res.json()
     setTestimonials(data)
     setLoading(false)
-  }
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    async function load() {
+      const res = await fetch('/api/admin/testimonials')
+      const data = await res.json()
+      if (cancelled) return
+      setTestimonials(data)
+      setLoading(false)
+    }
+    void load()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const updateStatus = async (id: string, status: 'approved' | 'rejected') => {
     await fetch(`/api/admin/testimonials/${id}`, {
