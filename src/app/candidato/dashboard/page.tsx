@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Briefcase, Clock, TrendingUp, Calendar } from 'lucide-react'
+import { Briefcase, TrendingUp, Calendar } from 'lucide-react'
 
 interface DashboardData {
   stats: {

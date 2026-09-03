@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { testimonials } from '@/lib/db/schema'
+import { testimonials, testimonialStatusEnum } from '@/lib/db/schema'
 import { eq, desc } from 'drizzle-orm'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const status = searchParams.get('status') || 'approved'
+  const requestedStatus = searchParams.get('status') || 'approved'
+  const validStatuses = testimonialStatusEnum.enumValues
+  const status = (validStatuses as readonly string[]).includes(requestedStatus)
+    ? (requestedStatus as (typeof testimonialStatusEnum.enumValues)[number])
+    : 'approved'
   const limit = parseInt(searchParams.get('limit') || '6')
   const token = searchParams.get('token')
 
@@ -38,7 +42,7 @@ export async function GET(req: NextRequest) {
       createdAt: testimonials.createdAt,
     })
     .from(testimonials)
-    .where(eq(testimonials.status, status as any))
+    .where(eq(testimonials.status, status))
     .orderBy(desc(testimonials.createdAt))
     .limit(limit)
 

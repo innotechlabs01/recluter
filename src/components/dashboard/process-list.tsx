@@ -24,8 +24,16 @@ const statusLabels: Record<string, string> = {
   closed: 'Cerrada',
 }
 
+interface ProcessItem {
+  id: string
+  title: string
+  positionsCount: number
+  location?: string | null
+  status?: string
+}
+
 export function ProcessList() {
-  const [processes, setProcesses] = useState<any[]>([])
+  const [processes, setProcesses] = useState<ProcessItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

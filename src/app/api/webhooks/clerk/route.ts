@@ -1,6 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
+import type { WebhookEvent } from '@clerk/nextjs/server'
 import { db } from '@/lib/db'
 import { companies, candidates, recruiters } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
@@ -25,27 +26,24 @@ export async function POST(req: Request) {
   const body = JSON.stringify(payload)
 
   const wh = new Webhook(WEBHOOK_SECRET)
-  let evt: any
 
+  let evt: WebhookEvent
   try {
     evt = wh.verify(body, {
       'svix-id': svix_id,
       'svix-timestamp': svix_timestamp,
       'svix-signature': svix_signature,
-    })
-  } catch (err) {
+    }) as WebhookEvent
+  } catch {
     return NextResponse.json({ error: 'Webhook verification failed' }, { status: 400 })
   }
 
-  const { id } = evt.data
-  const eventType = evt.type
-
-  switch (eventType) {
+  switch (evt.type) {
     case 'user.created': {
-      const { email_addresses, first_name, last_name, unsafe_metadata } = evt.data
-      const role = unsafe_metadata?.role as string | undefined
+      const { email_addresses, first_name, last_name, id } = evt.data
+      const role = (evt.data as { unsafe_metadata?: { role?: string } }).unsafe_metadata?.role
 
-      if (role === 'candidate') {
+      if (role === 'candidate' && id) {
         await db.insert(candidates).values({
           firstName: first_name || '',
           lastName: last_name || '',
@@ -56,7 +54,8 @@ export async function POST(req: Request) {
       break
     }
     case 'user.updated': {
-      const { email_addresses, first_name, last_name } = evt.data
+      const { email_addresses, first_name, last_name, id } = evt.data
+      if (!id) break
       await db.update(recruiters)
         .set({
           name: `${first_name || ''} ${last_name || ''}`.trim(),
@@ -66,6 +65,8 @@ export async function POST(req: Request) {
       break
     }
     case 'user.deleted': {
+      const { id } = evt.data
+      if (!id) break
       await db.delete(recruiters).where(eq(recruiters.userId, id))
       break
     }

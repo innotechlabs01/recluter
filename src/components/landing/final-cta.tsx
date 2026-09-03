@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export function FinalCTA() {
@@ -11,11 +12,11 @@ export function FinalCTA() {
           Comenzá hoy mismo y recibí candidatos calificados en menos de 48 horas.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/sign-up">
+          <Link href="/sign-up">
             <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
               Crear cuenta gratis
             </Button>
-          </a>
+          </Link>
           <a href="#contacto">
             <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
               Hablar con ventas

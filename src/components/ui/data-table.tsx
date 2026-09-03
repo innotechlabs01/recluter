@@ -27,7 +27,7 @@ interface DataTableProps<T> {
   pageSize?: number
 }
 
-export function DataTable<T extends Record<string, any>>({
+export function DataTable<T>({
   data,
   columns,
   searchable = true,
@@ -40,7 +40,7 @@ export function DataTable<T extends Record<string, any>>({
   // Filter data
   const filteredData = data.filter((item) => {
     if (!search) return true
-    return Object.values(item).some((value) =>
+    return Object.values(item as Record<string, unknown>).some((value) =>
       String(value).toLowerCase().includes(search.toLowerCase())
     )
   })
@@ -87,7 +87,7 @@ export function DataTable<T extends Record<string, any>>({
                 <TableRow key={i}>
                   {columns.map((col) => (
                     <TableCell key={col.key}>
-                      {col.render ? col.render(item) : item[col.key]}
+                      {col.render ? col.render(item) : (item as Record<string, unknown>)[col.key] as React.ReactNode}
                     </TableCell>
                   ))}
                 </TableRow>

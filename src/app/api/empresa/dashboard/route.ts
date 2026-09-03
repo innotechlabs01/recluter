@@ -5,9 +5,8 @@ import {
   companies,
   jobRequests,
   applications,
-  jobRequestSteps,
 } from '@/lib/db/schema'
-import { eq, and, count, desc } from 'drizzle-orm'
+import { eq, count, desc } from 'drizzle-orm'
 
 export async function GET() {
   const { userId, orgId } = await auth()
@@ -31,16 +30,6 @@ export async function GET() {
     .select({ value: count() })
     .from(jobRequests)
     .where(eq(jobRequests.companyId, company.id))
-
-  // Active processes (not closed/cancelled/hired)
-  const [activeResult] = await db
-    .select({ value: count() })
-    .from(jobRequests)
-    .where(
-      and(
-        eq(jobRequests.companyId, company.id),
-      )
-    )
 
   const activeProcesses = await db
     .select()

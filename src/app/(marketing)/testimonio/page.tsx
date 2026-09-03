@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Star } from 'lucide-react'
+import { testimonialSchema } from '@/lib/validations/profile'
 
 interface TokenData {
   authorName: string
@@ -27,32 +28,30 @@ export default function TestimonioPage() {
   const [testimonialId, setTestimonialId] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!token) {
-      setError('Token no válido')
-      return
-    }
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]))
-      setTokenData({
-        authorName: payload.authorName,
-        authorRole: payload.authorRole,
-        companyName: payload.companyName,
-        jobRequestId: payload.jobRequestId,
-      })
-
-      // Fetch testimonial ID by token
-      fetch(`/api/testimonials?token=${token}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.length > 0) setTestimonialId(data[0].id)
+    if (!token) return
+    ;(async () => {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]))
+        setTokenData({
+          authorName: payload.authorName,
+          authorRole: payload.authorRole,
+          companyName: payload.companyName,
+          jobRequestId: payload.jobRequestId,
         })
-    } catch {
-      setError('Token no válido')
-    }
+
+        // Fetch testimonial ID by token
+        const res = await fetch(`/api/testimonials?token=${token}`)
+        const data = await res.json()
+        if (data.length > 0) setTestimonialId(data[0].id)
+      } catch {
+        setError('Token no válido')
+      }
+    })()
   }, [token])
 
   const handleSubmit = async () => {
-    if (rating === 0 || quote.length < 10) {
+    const parsed = testimonialSchema.safeParse({ quote, rating })
+    if (!parsed.success) {
       setError('Por favor completá todos los campos')
       return
     }
@@ -92,7 +91,7 @@ export default function TestimonioPage() {
     )
   }
 
-  if (error && !tokenData) {
+  if (!token || (error && !tokenData)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center max-w-md mx-auto p-8">
@@ -161,7 +160,7 @@ export default function TestimonioPage() {
             </label>
             <textarea
               value={quote}
-              onChange={(e) => setQuote(e.target.value)}
+              onChange={(e) => setQuote(e.target.value.slice(0, 500))}
               placeholder="Contanos sobre tu experiencia con Recluter..."
               rows={4}
               className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"

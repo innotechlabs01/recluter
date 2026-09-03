@@ -11,6 +11,8 @@ import { StepSelection } from '@/components/wizard/step-selection'
 import { StepReview } from '@/components/wizard/step-review'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { useState } from 'react'
+import { solicitudStepSchemas } from '@/lib/validations/solicitud'
 
 const steps: Record<number, { component: React.ComponentType; title: string }> = {
   1: { component: StepCompany, title: 'Información de la empresa' },
@@ -26,15 +28,34 @@ export default function WizardStepPage() {
   const router = useRouter()
   const step = Number(params.step)
   const { setStep, reset } = useWizardStore()
+  const [errors, setErrors] = useState<string[]>([])
   const current = steps[step] || steps[1]
   const CurrentStepComponent = current.component
 
   const handleNext = () => {
+    // Validate current step's fields before allowing forward navigation.
+    const schema = solicitudStepSchemas[step as keyof typeof solicitudStepSchemas]
+    if (schema) {
+      const data = useWizardStore.getState().data
+      const result = schema.safeParse(data)
+      if (!result.success) {
+        // Collect the messages for every invalid field as inline errors.
+        const messages = result.error.issues.map((issue) => issue.message)
+        setErrors(
+          messages.length
+            ? Array.from(new Set(messages))
+            : ['Completá los campos obligatorios para continuar']
+        )
+        return
+      }
+    }
+    setErrors([])
     setStep(step + 1)
     router.push(`/empresa/solicitar/${step + 1}`)
   }
 
   const handleBack = () => {
+    setErrors([])
     if (step > 1) {
       setStep(step - 1)
       router.push(`/empresa/solicitar/${step - 1}`)
@@ -105,7 +126,7 @@ export default function WizardStepPage() {
       } else {
         alert('Error al enviar la solicitud')
       }
-    } catch (error) {
+    } catch {
       alert('Error de conexión')
     }
   }
@@ -122,6 +143,19 @@ export default function WizardStepPage() {
       </div>
 
       <Stepper currentStep={step} />
+
+      {errors.length > 0 && (
+        <div className="rounded-lg bg-red-50 border border-red-200 p-4" data-testid="wizard-errors">
+          <p className="text-sm font-medium text-red-700 mb-1">
+            Corregí los siguientes campos para continuar:
+          </p>
+          <ul className="list-disc list-inside space-y-0.5">
+            {Array.from(new Set(errors)).map((msg, i) => (
+              <li key={i} className="text-xs text-red-700">{msg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <Card className="p-6">
         <CurrentStepComponent />

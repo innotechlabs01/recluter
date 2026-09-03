@@ -4,14 +4,30 @@
 import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
+import type { ReactNode } from 'react'
 
-const companies = [
+interface Company {
+  name: string
+  industry: string
+  location: string
+  users: number
+  requests: number
+  status: 'active' | 'inactive' | 'suspended'
+}
+
+const companies: Company[] = [
   { name: 'Acme Corp', industry: 'Tecnología', location: 'New York, US', users: 5, requests: 8, status: 'active' },
   { name: 'TechCo', industry: 'SaaS', location: 'San Francisco, US', users: 3, requests: 5, status: 'active' },
   { name: 'GlobalInc', industry: 'Consultoría', location: 'Miami, US', users: 8, requests: 12, status: 'active' },
 ]
 
-const columns = [
+interface CompanyColumn {
+  key: string
+  header: string
+  render?: (item: Company) => ReactNode
+}
+
+const columns: CompanyColumn[] = [
   { key: 'name', header: 'Empresa' },
   { key: 'industry', header: 'Industria' },
   { key: 'location', header: 'Ubicación' },
@@ -20,8 +36,10 @@ const columns = [
   {
     key: 'status',
     header: 'Estado',
-    render: (item: any) => (
-      <Badge className="bg-green-100 text-green-700">Activa</Badge>
+    render: (item) => (
+      <Badge className={item.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-600'}>
+        {item.status === 'active' ? 'Activa' : 'Inactiva'}
+      </Badge>
     ),
   },
 ]
