@@ -19,5 +19,6 @@ test('creates a new recruiter and it appears in the list', async ({ page }) => {
 
 test('request page shows an active-only assignment dropdown', async ({ page }) => {
   await page.goto('/admin/solicitudes')
-  await expect(page.getByTestId('assign-1')).toBeVisible()
+  // Real data uses UUID ids → match any assign-<id> dropdown.
+  await expect(page.locator('select[data-testid^="assign-"]').first()).toBeVisible()
 })

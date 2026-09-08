@@ -7,6 +7,10 @@ interface CandidateCardProps {
   experience: string
   skills: string[]
   status: 'suggested' | 'reviewed' | 'shortlisted' | 'interviewed' | 'selected' | 'rejected'
+  id?: string
+  email?: string
+  firstName?: string
+  lastName?: string
 }
 
 const statusColors = {
@@ -27,16 +31,31 @@ const statusLabels = {
   rejected: 'Rechazado',
 }
 
-export function CandidateCard({ name, experience, skills, status }: CandidateCardProps) {
+// Accepts real DB shapes: callers may pass firstName/lastName/email/id from
+// /api/candidatos or /api/solicitudes/[id]/applications instead of a
+// preformatted name. Falls back to `name` for backwards compatibility.
+export function CandidateCard({
+  name,
+  experience,
+  skills,
+  status,
+  email,
+  firstName,
+  lastName,
+}: CandidateCardProps) {
+  const displayName = firstName || lastName ? `${firstName ?? ''} ${lastName ?? ''}`.trim() : name
+  const safeSkills = Array.isArray(skills) ? skills : []
+
   return (
     <Card className="hover:border-blue-300 transition-colors cursor-pointer">
       <CardContent className="pt-6">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="font-semibold text-slate-900">{name}</h3>
+            <h3 className="font-semibold text-slate-900">{displayName}</h3>
             <p className="text-sm text-slate-600 mt-1">{experience}</p>
+            {email && <p className="text-sm text-slate-500">{email}</p>}
             <div className="flex flex-wrap gap-1 mt-2">
-              {skills.map((skill) => (
+              {safeSkills.map((skill) => (
                 <Badge key={skill} variant="secondary" className="text-xs">{skill}</Badge>
               ))}
             </div>

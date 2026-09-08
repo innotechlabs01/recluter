@@ -1,31 +1,55 @@
 'use client'
 
-
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Badge } from '@/components/ui/badge'
 
-const applications = [
-  { company: 'Acme Corp', title: 'Desarrollador Senior', date: '18 Ago', status: 'reviewed' },
-  { company: 'TechCo', title: 'Account Manager', date: '15 Ago', status: 'shortlisted' },
-  { company: 'GlobalInc', title: 'Designer UX', date: '20 Ago', status: 'suggested' },
-]
+interface Row {
+  id: string
+  jobTitle: string
+  companyName: string
+  status?: string | null
+  createdAt?: string | null
+}
 
 const statusColors: Record<string, string> = {
   suggested: 'bg-blue-100 text-blue-700',
   reviewed: 'bg-slate-100 text-slate-700',
   shortlisted: 'bg-yellow-100 text-yellow-700',
   interviewed: 'bg-purple-100 text-purple-700',
+  selected: 'bg-green-100 text-green-700',
+  rejected: 'bg-red-100 text-red-700',
 }
 
 export default function PostulacionesPage() {
   const t = useTranslations('candidato.applications')
+  const [rows, setRows] = useState<Row[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const statusLabels: Record<string, string> = {
-    suggested: t('sent'),
-    reviewed: t('reviewed'),
-    shortlisted: t('shortlisted'),
-    interviewed: t('interviewed'),
-  }
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/candidato/dashboard')
+      .then((res) => {
+        if (!res.ok) throw new Error('No se pudieron cargar las postulaciones')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) setRows(data?.recentUpdates ?? [])
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (loading) return <div className="animate-pulse h-32 bg-slate-100 rounded-lg" />
+  if (error) return <p className="text-sm text-red-600">{error}</p>
 
   return (
     <div className="space-y-6">
@@ -41,17 +65,22 @@ export default function PostulacionesPage() {
             </tr>
           </thead>
           <tbody>
-            {applications.map((app, i) => (
-              <tr key={i} className="border-t hover:bg-slate-50">
-                <td className="p-4 font-medium text-slate-900">{app.company}</td>
-                <td className="p-4 text-sm text-slate-600">{app.title}</td>
-                <td className="p-4 text-sm text-slate-600">{app.date}</td>
-                <td className="p-4"><Badge className={statusColors[app.status]}>{statusLabels[app.status]}</Badge></td>
+            {rows.map((app) => (
+              <tr key={app.id} className="border-t hover:bg-slate-50">
+                <td className="p-4 font-medium text-slate-900">{app.companyName}</td>
+                <td className="p-4 text-sm text-slate-600">{app.jobTitle}</td>
+                <td className="p-4 text-sm text-slate-600">
+                  {app.createdAt ? new Date(app.createdAt).toLocaleDateString('es-AR') : '—'}
+                </td>
+                <td className="p-4">
+                  <Badge className={statusColors[app.status ?? 'suggested']}>{app.status}</Badge>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {rows.length === 0 && <p className="text-slate-500">Todavía no te postulaste a ninguna oferta.</p>}
     </div>
   )
 }

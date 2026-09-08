@@ -14,6 +14,11 @@ import {
 
 export function StepSelection() {
   const { data, updateData } = useWizardStore()
+  const minDeadline = (() => {
+    const d = new Date()
+    d.setDate(d.getDate() + 30)
+    return d.toISOString().slice(0, 10)
+  })()
 
   return (
     <div className="space-y-6">
@@ -40,11 +45,12 @@ export function StepSelection() {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="deadline">Fecha límite</Label>
-          <Input 
-            id="deadline" 
+          <Label htmlFor="deadline">Fecha límite (mínimo 30 días desde hoy) *</Label>
+          <Input
+            id="deadline"
             type="date"
-            value={data.deadline}
+            min={minDeadline}
+            value={data.deadline || minDeadline}
             onChange={(e) => updateData({ deadline: e.target.value })}
           />
         </div>

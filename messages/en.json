@@ -241,7 +241,16 @@
       "metrics": "Metrics",
       "avgHireTime": "Average hire time",
       "successRate": "Success rate",
-      "monthlyRequests": "Requests this month"
+      "monthlyRequests": "Requests this month",
+      "funnel": "Funnel by stage",
+      "stageTimes": "Stage cycle times",
+      "createdToSearching": "Created → searching",
+      "searchingToSent": "Searching → sent",
+      "createdToHired": "Created → hired",
+      "hours": "h",
+      "recruiterLoad": "Active recruiter load",
+      "inactive": "inactive",
+      "noData": "No data yet."
     },
     "companies": {
       "title": "Companies",
@@ -261,6 +270,7 @@
       "recruiter": "Recruiter",
       "candidates": "Candidates",
       "unassigned": "Unassigned",
+      "status": "Status",
       "reviewing": "Reviewing",
       "searching": "Active search",
       "candidatesSent": "Candidates sent"

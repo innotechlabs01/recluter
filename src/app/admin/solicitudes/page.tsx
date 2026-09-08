@@ -29,18 +29,14 @@ const statusColors: Record<string, string> = {
   candidates_sent: 'bg-green-100 text-green-700',
 }
 
-const initialRequests: RequestRow[] = [
-  { id: '1', company: 'Acme Corp', title: 'Desarrollador Senior', date: '18 Ago', recruiterId: null, recruiterName: null, status: 'searching', candidates: 5 },
-  { id: '2', company: 'TechCo', title: 'Account Manager', date: '15 Ago', recruiterId: null, recruiterName: null, status: 'candidates_sent', candidates: 3 },
-  { id: '3', company: 'GlobalInc', title: 'Designer UX', date: '20 Ago', recruiterId: null, recruiterName: null, status: 'reviewing', candidates: 0 },
-]
-
 export default function SolicitudesPage() {
   const t = useTranslations('admin.requests')
 
-  const [requests, setRequests] = useState<RequestRow[]>(initialRequests)
+  const [requests, setRequests] = useState<RequestRow[]>([])
   const [recruiters, setRecruiters] = useState<Recruiter[]>([])
   const [assigning, setAssigning] = useState<Record<string, boolean>>({})
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   const statusLabels: Record<string, string> = {
     reviewing: t('reviewing'),
@@ -49,18 +45,29 @@ export default function SolicitudesPage() {
   }
 
   useEffect(() => {
-    const activeRecruiters = async () => {
+    let cancelled = false
+    async function load() {
       try {
-        const res = await fetch('/api/admin/recruiters')
-        if (res.ok) {
-          const all = (await res.json()) as Recruiter[]
-          setRecruiters(all.filter((r) => r.isActive))
-        }
-      } catch {
-        // fall back to empty list if the DB is unavailable
+        const [jobsRes, recruitersRes] = await Promise.all([
+          fetch('/api/admin/jobs'),
+          fetch('/api/admin/recruiters'),
+        ])
+        if (!jobsRes.ok) throw new Error('No se pudieron cargar las solicitudes')
+        const jobs = (await jobsRes.json()) as RequestRow[]
+        const all = recruitersRes.ok ? ((await recruitersRes.json()) as Recruiter[]) : []
+        if (cancelled) return
+        setRequests(jobs)
+        setRecruiters(all.filter((r) => r.isActive))
+      } catch (err) {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      } finally {
+        if (!cancelled) setLoading(false)
       }
     }
-    activeRecruiters()
+    void load()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const handleAssign = async (requestId: string, recruiterId: string) => {
@@ -124,6 +131,9 @@ export default function SolicitudesPage() {
     },
   ]
 
+  if (loading) return <div className="animate-pulse h-32 bg-slate-100 rounded-lg" />
+  if (error) return <p className="text-sm text-red-600">{error}</p>
+
   return (
     <div className="space-y-6">
       <div>
@@ -136,6 +146,9 @@ export default function SolicitudesPage() {
           columns={columns}
           searchPlaceholder="Buscar solicitud..."
         />
+        {requests.length === 0 && (
+          <p className="p-4 text-sm text-slate-500">No hay solicitudes todavía.</p>
+        )}
       </div>
     </div>
   )

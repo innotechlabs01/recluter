@@ -41,7 +41,13 @@ export const solicitudSchema = z.object({
 
   // Step 5: Selection
   candidatesCount: z.number().min(1),
-  deadline: z.string().optional(),
+  deadline: z.string().min(1, 'La fecha límite es requerida').refine((v) => {
+    const min = new Date()
+    min.setHours(0, 0, 0, 0)
+    min.setDate(min.getDate() + 30)
+    const d = new Date(v + 'T00:00:00')
+    return !Number.isNaN(d.getTime()) && d >= min
+  }, 'La fecha límite debe ser al menos 30 días desde hoy'),
   interviewCount: z.number().min(1),
   technicalTests: z.string().optional(),
   processRequirements: z.string().optional(),

@@ -30,6 +30,7 @@ export async function PATCH(
             : [body.specialties]
           : undefined,
       isActive: body.isActive,
+      maxConcurrent: body.maxConcurrent,
     })
     .where(eq(recruiters.id, id))
     .returning()

@@ -245,7 +245,16 @@
       "metrics": "Métricas",
       "avgHireTime": "Tiempo promedio de contratación",
       "successRate": "Tasa de éxito",
-      "monthlyRequests": "Solicitudes este mes"
+      "monthlyRequests": "Solicitudes este mes",
+      "funnel": "Embudo por etapa",
+      "stageTimes": "Tiempos por etapa",
+      "createdToSearching": "Creada → en búsqueda",
+      "searchingToSent": "En búsqueda → enviados",
+      "createdToHired": "Creada → contratada",
+      "hours": "h",
+      "recruiterLoad": "Carga activa de reclutadores",
+      "inactive": "inactivo",
+      "noData": "Sin datos todavía."
     },
     "companies": {
       "title": "Empresas",
@@ -265,6 +274,7 @@
       "recruiter": "Reclutador",
       "candidates": "Candidatos",
       "unassigned": "Sin asignar",
+      "status": "Estado",
       "reviewing": "En revisión",
       "searching": "Búsqueda activa",
       "candidatesSent": "Candidatos enviados"

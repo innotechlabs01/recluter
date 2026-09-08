@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { auth } from '@clerk/nextjs/server'
 import { createClient } from '@supabase/supabase-js'
+import { db } from '@/lib/db'
+import { candidates, documents } from '@/lib/db/schema'
+import { eq } from 'drizzle-orm'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -52,7 +55,27 @@ export async function POST(req: Request) {
     .from('documents')
     .getPublicUrl(fileName)
 
+  // Persist the document row so /api/candidato/documents lists it.
+  let documentId: string | null = null
+  const [candidate] = await db
+    .select({ id: candidates.id })
+    .from(candidates)
+    .where(eq(candidates.clerkUserId, userId))
+  if (candidate) {
+    const [doc] = await db
+      .insert(documents)
+      .values({
+        candidateId: candidate.id,
+        filename: file.name,
+        url: urlData.publicUrl,
+        type: file.type,
+      })
+      .returning({ id: documents.id })
+    documentId = doc.id
+  }
+
   return NextResponse.json({
+    id: documentId,
     url: urlData.publicUrl,
     filename: file.name,
     type: file.type,

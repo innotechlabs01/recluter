@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@clerk/nextjs/server'
+import { resolveAuth } from '@/lib/test-auth'
 import { db } from '@/lib/db'
 import { companies } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 
 // GET /api/empresa/profile - Get current company profile
 export async function GET() {
-  const { userId, orgId } = await auth()
+  const { userId, orgId } = await resolveAuth()
 
   if (!userId || !orgId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -23,7 +23,7 @@ export async function GET() {
 
 // PUT /api/empresa/profile - Update company profile
 export async function PUT(req: Request) {
-  const { userId, orgId } = await auth()
+  const { userId, orgId } = await resolveAuth()
 
   if (!userId || !orgId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

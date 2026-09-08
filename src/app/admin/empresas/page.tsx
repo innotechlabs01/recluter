@@ -1,12 +1,13 @@
 'use client'
 
-
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 import type { ReactNode } from 'react'
 
 interface Company {
+  id: string
   name: string
   industry: string
   location: string
@@ -14,12 +15,6 @@ interface Company {
   requests: number
   status: 'active' | 'inactive' | 'suspended'
 }
-
-const companies: Company[] = [
-  { name: 'Acme Corp', industry: 'Tecnología', location: 'New York, US', users: 5, requests: 8, status: 'active' },
-  { name: 'TechCo', industry: 'SaaS', location: 'San Francisco, US', users: 3, requests: 5, status: 'active' },
-  { name: 'GlobalInc', industry: 'Consultoría', location: 'Miami, US', users: 8, requests: 12, status: 'active' },
-]
 
 interface CompanyColumn {
   key: string
@@ -46,6 +41,33 @@ const columns: CompanyColumn[] = [
 
 export default function EmpresasPage() {
   const t = useTranslations('admin.companies')
+  const [companies, setCompanies] = useState<Company[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/admin/companies')
+      .then((res) => {
+        if (!res.ok) throw new Error('No se pudieron cargar las empresas')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) setCompanies(data as Company[])
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (loading) return <div className="animate-pulse h-32 bg-slate-100 rounded-lg" />
+  if (error) return <p className="text-sm text-red-600">{error}</p>
 
   return (
     <div className="space-y-6">
@@ -59,6 +81,9 @@ export default function EmpresasPage() {
           columns={columns}
           searchPlaceholder="Buscar empresa..."
         />
+        {companies.length === 0 && (
+          <p className="p-4 text-sm text-slate-500">Todavía no hay empresas.</p>
+        )}
       </div>
     </div>
   )

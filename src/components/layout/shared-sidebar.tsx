@@ -25,7 +25,7 @@ import {
 } from 'lucide-react'
 
 interface SidebarProps {
-  role: 'empresa' | 'admin' | 'candidato'
+  role: 'empresa' | 'admin' | 'candidato' | 'reclutador'
   user?: {
     name: string
     email: string
@@ -76,6 +76,17 @@ const navigationConfig = {
     ],
     bottomItems: [
       { name: 'Notificaciones', href: '/candidato/notificaciones', icon: Bell },
+    ],
+  },
+  reclutador: {
+    label: 'Portal Reclutador',
+    items: [
+      { name: 'Dashboard', href: '/reclutador/dashboard', icon: LayoutDashboard },
+      { name: 'Seguimiento', href: '/reclutador/seguimiento', icon: Briefcase },
+      { name: 'Chat', href: '/reclutador/chat', icon: MessageSquare },
+    ],
+    bottomItems: [
+      { name: 'Notificaciones', href: '/reclutador/notificaciones', icon: Bell },
     ],
   },
 }

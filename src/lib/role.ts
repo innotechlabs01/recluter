@@ -1,6 +1,6 @@
-export type Role = 'company' | 'candidate' | 'admin'
+export type Role = 'company' | 'candidate' | 'admin' | 'recruiter'
 
-const VALID_ROLES = new Set<Role>(['company', 'candidate', 'admin'])
+const VALID_ROLES = new Set<Role>(['company', 'candidate', 'admin', 'recruiter'])
 
 export interface RoleUser {
   unsafeMetadata?: {
@@ -38,6 +38,8 @@ export function roleDashboardPath(role: Role | null): string {
       return '/candidato/dashboard'
     case 'admin':
       return '/admin/dashboard'
+    case 'recruiter':
+      return '/reclutador/dashboard'
     default:
       return '/role-selection'
   }

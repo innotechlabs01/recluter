@@ -79,6 +79,8 @@ export default function WizardStepPage() {
           salaryMin: data.salaryMin,
           salaryMax: data.salaryMax,
           currency: data.currency,
+          startDate: data.startDate,
+          deadline: data.deadline,
           companyData: {
             companyName: data.companyName,
             industry: data.industry,
@@ -94,6 +96,8 @@ export default function WizardStepPage() {
             experienceLevel: data.experienceLevel,
             positionType: data.positionType,
             workMode: data.workMode,
+            positionLocation: data.positionLocation,
+            startDate: data.startDate,
           },
           profileData: {
             minExperience: data.minExperience,

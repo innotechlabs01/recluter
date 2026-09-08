@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@clerk/nextjs/server'
+import { resolveAuth } from '@/lib/test-auth'
 import { db } from '@/lib/db'
 import { recruiters } from '@/lib/db/schema'
 import { desc } from 'drizzle-orm'
 
 // GET /api/admin/recruiters - List all recruiters (active + inactive)
 export async function GET() {
-  const { userId } = await auth()
+  const { userId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -18,7 +18,7 @@ export async function GET() {
 
 // POST /api/admin/recruiters - Create a recruiter
 export async function POST(req: Request) {
-  const { userId } = await auth()
+  const { userId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })

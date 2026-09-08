@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { Timeline } from '@/components/dashboard/timeline'
+import { Timeline, type ProcessEventItem } from '@/components/dashboard/timeline'
+import { JobChatPanel } from '@/components/chat/job-chat-panel'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -31,20 +32,37 @@ interface ProcessDetail {
 export default function ProcessDetailPage() {
   const params = useParams()
   const [process, setProcess] = useState<ProcessDetail | null>(null)
+  const [applications, setApplications] = useState<Array<{ id: string; firstName: string; lastName: string; email: string; status?: string | null }>>([])
+  const [events, setEvents] = useState<ProcessEventItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!params.id) return
-    fetch(`/api/solicitudes/${params.id}`)
-      .then(res => {
+    let cancelled = false
+    Promise.all([
+      fetch(`/api/solicitudes/${params.id}`).then((res) => {
         if (!res.ok) throw new Error('Not found')
         return res.json()
-      })
-      .then(data => {
+      }),
+      fetch(`/api/solicitudes/${params.id}/applications`).then((res) => (res.ok ? res.json() : [])),
+      fetch(`/api/solicitudes/${params.id}/events`).then((res) => (res.ok ? res.json() : [])),
+    ])
+      .then(([data, apps, evts]) => {
+        if (cancelled) return
         setProcess(data)
+        setApplications(apps)
+        setEvents(evts)
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch(() => {
+        if (cancelled) return
+        setError('No se pudo cargar el proceso')
+        setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
   }, [params.id])
 
   if (loading) {
@@ -57,7 +75,7 @@ export default function ProcessDetailPage() {
   }
 
   if (!process) {
-    return <div className="text-center py-8 text-slate-500">Proceso no encontrado</div>
+    return <div className="text-center py-8 text-slate-500">{error ?? 'Proceso no encontrado'}</div>
   }
 
   return (
@@ -75,7 +93,7 @@ export default function ProcessDetailPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2">
           <h2 className="text-lg font-semibold text-slate-900 mb-4">Timeline del proceso</h2>
-          <Timeline />
+          <Timeline events={events} />
         </div>
         <div>
           <h2 className="text-lg font-semibold text-slate-900 mb-4">Resumen</h2>
@@ -100,6 +118,34 @@ export default function ProcessDetailPage() {
           <Link href="/empresa/candidatos" className="block mt-4">
             <Button variant="outline" className="w-full">Ver candidatos</Button>
           </Link>
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-lg font-semibold text-slate-900 mb-4">
+          Postulaciones ({applications.length})
+        </h2>        <div className="bg-white rounded-lg border divide-y">
+          {applications.map((app) => (
+            <div key={app.id} className="p-4 flex items-center justify-between text-sm">
+              <div>
+                <p className="font-medium text-slate-900">{app.firstName} {app.lastName}</p>
+                <p className="text-slate-500">{app.email}</p>
+              </div>
+              <Badge className="bg-slate-100 text-slate-700">{app.status}</Badge>
+            </div>
+          ))}
+          {applications.length === 0 && (
+            <p className="p-4 text-sm text-slate-500">Sin postulaciones todavía.</p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h2 className="text-lg font-semibold text-slate-900 mb-4">
+          Chat con tu reclutador
+        </h2>
+        <div className="bg-white rounded-lg border p-4">
+          <JobChatPanel jobRequestId={process.id} />
         </div>
       </div>
     </div>

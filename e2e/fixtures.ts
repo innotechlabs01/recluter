@@ -7,14 +7,14 @@ import type { Page } from '@playwright/test'
  * enough to drive role-based routing in the app.
  */
 
-export type Role = 'company' | 'candidate' | 'admin'
+export type Role = 'company' | 'candidate' | 'admin' | 'recruiter'
 
 export async function setRoleCookie(page: Page, role: Role) {
   await page.context().addCookies([
     {
       name: 'user_role',
       value: role,
-      url: 'http://localhost:3000',
+      url: process.env.E2E_BASE_URL || 'http://localhost:3000',
       sameSite: 'Lax',
       expires: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365,
     },

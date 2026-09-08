@@ -19,7 +19,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: process.env.E2E_BASE_URL || 'http://localhost:3000',
     trace: 'on-first-retry',
   },
   globalSetup: './e2e/global-setup.ts',
@@ -30,9 +30,15 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
+    command: `PORT=${process.env.E2E_PORT || 3000} npm run dev`,
+    url: process.env.E2E_BASE_URL || 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    env: {
+      E2E_BYPASS_CLERK: '1',
+      DATABASE_URL:
+        process.env.DATABASE_URL ||
+        'postgresql://postgres:postgres@127.0.0.1:54422/postgres',
+    },
   },
 })

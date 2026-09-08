@@ -56,6 +56,12 @@ interface WizardStore {
   reset: () => void
 }
 
+function defaultDeadline(): string {
+  const d = new Date()
+  d.setDate(d.getDate() + 30)
+  return d.toISOString().slice(0, 10)
+}
+
 const initialData: WizardData = {
   companyName: '',
   industry: '',
@@ -88,7 +94,7 @@ const initialData: WizardData = {
   benefits: '',
   additionalInfo: '',
   candidatesCount: 5,
-  deadline: '',
+  deadline: defaultDeadline(),
   interviewCount: 2,
   technicalTests: '',
   processRequirements: '',

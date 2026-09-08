@@ -12,7 +12,20 @@ import { cookies } from 'next/headers'
  * be downgraded by the public role-selection flow, so an admin is passed
  * through unchanged.
  */
-export async function setUserRole(role: 'company' | 'candidate') {
+export async function setUserRole(role: 'company' | 'candidate' | 'recruiter') {
+  const cookieStore = await cookies()
+
+  // E2E bypass: no Clerk session in Playwright — persist the cookie only.
+  if (process.env.E2E_BYPASS_CLERK === '1') {
+    cookieStore.set('user_role', role, {
+      path: '/',
+      httpOnly: false,
+      sameSite: 'lax',
+      maxAge: 60 * 60 * 24 * 365, // 1 year
+    })
+    return { success: true, passthrough: false }
+  }
+
   const { userId } = await auth()
 
   if (!userId) {
@@ -35,7 +48,6 @@ export async function setUserRole(role: 'company' | 'candidate') {
 
   // 2. Mirror into the cookie so middleware can read it (JWT doesn't include
   //    unsafeMetadata by default).
-  const cookieStore = await cookies()
   cookieStore.set('user_role', role, {
     path: '/',
     httpOnly: false,

@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
-import { auth, currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'
+import { resolveAuth, isE2eBypass } from '@/lib/test-auth'
 import { db } from '@/lib/db'
 import { candidates, candidateProfiles } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 
 // GET /api/candidato/profile - Get current candidate profile
 export async function GET() {
-  const { userId } = await auth()
+  const { userId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -33,15 +34,15 @@ export async function GET() {
 // Self-heals the sign-up webhook timing gap: `user.created` fires before the
 // role is set, so the candidate row may not exist yet. We insert it on demand.
 export async function PUT(req: Request) {
-  const { userId } = await auth()
+  const { userId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   const body = await req.json()
-  const user = await currentUser()
-  const email = user?.emailAddresses?.[0]?.emailAddress
+  const user = isE2eBypass() ? null : await currentUser()
+  const email = user?.emailAddresses?.[0]?.emailAddress ?? body.email ?? `e2e-${userId}@test.local`
 
   // 1. Ensure the candidate row exists (upsert by clerk user id).
   let [candidate] = await db

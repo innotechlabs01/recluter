@@ -23,6 +23,10 @@ test('resolveRole returns admin for an admin user', () => {
   assert.equal(resolveRole(user({ role: 'admin' })), 'admin')
 })
 
+test('resolveRole returns recruiter for a recruiter user', () => {
+  assert.equal(resolveRole(user({ role: 'recruiter' })), 'recruiter')
+})
+
 test('resolveRole returns null when no user is passed', () => {
   assert.equal(resolveRole(null), null)
   assert.equal(resolveRole(undefined), null)
@@ -48,5 +52,6 @@ test('roleDashboardPath maps each role to its portal', () => {
   assert.equal(roleDashboardPath('company'), '/empresa/dashboard')
   assert.equal(roleDashboardPath('candidate'), '/candidato/dashboard')
   assert.equal(roleDashboardPath('admin'), '/admin/dashboard')
+  assert.equal(roleDashboardPath('recruiter'), '/reclutador/dashboard')
   assert.equal(roleDashboardPath(null), '/role-selection')
 })

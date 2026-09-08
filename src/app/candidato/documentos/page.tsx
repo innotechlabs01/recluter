@@ -2,29 +2,44 @@
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Upload, FileText, Trash2 } from 'lucide-react'
 
 interface Document {
   id: string
   filename: string
   url: string
-  type: string
-  uploadedAt: string
+  type: string | null
+  uploadedAt: string | null
 }
 
 export default function DocumentosPage() {
-  const [documents, setDocuments] = useState<Document[]>([
-    {
-      id: '1',
-      filename: 'CV_Juan_Perez.pdf',
-      url: '#',
-      type: 'application/pdf',
-      uploadedAt: '2026-08-14',
-    },
-  ])
+  const [documents, setDocuments] = useState<Document[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/candidato/documents')
+      .then((res) => {
+        if (!res.ok) throw new Error('No se pudieron cargar los documentos')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) setDocuments(data as Document[])
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -42,16 +57,21 @@ export default function DocumentosPage() {
 
       if (response.ok) {
         const data = await response.json()
-        setDocuments((prev) => [
-          ...prev,
-          {
-            id: String(Date.now()),
-            filename: data.filename,
-            url: data.url,
-            type: data.type,
-            uploadedAt: new Date().toISOString().split('T')[0],
-          },
-        ])
+        const res = await fetch('/api/candidato/documents')
+        if (res.ok) {
+          setDocuments((await res.json()) as Document[])
+        } else {
+          setDocuments((prev) => [
+            ...prev,
+            {
+              id: data.id ?? String(Date.now()),
+              filename: data.filename,
+              url: data.url,
+              type: data.type,
+              uploadedAt: new Date().toISOString(),
+            },
+          ])
+        }
       } else {
         const err = await response.json()
         alert(err.error || 'Error uploading file')
@@ -66,11 +86,16 @@ export default function DocumentosPage() {
     }
   }
 
-  const handleDelete = (id: string) => {
-    if (confirm('¿Eliminar este archivo?')) {
+  const handleDelete = async (id: string) => {
+    if (!confirm('¿Eliminar este archivo?')) return
+    const res = await fetch(`/api/candidato/documents/${id}`, { method: 'DELETE' })
+    if (res.ok) {
       setDocuments((prev) => prev.filter((doc) => doc.id !== id))
     }
   }
+
+  if (loading) return <div className="animate-pulse h-32 bg-slate-100 rounded-lg" />
+  if (error) return <p className="text-sm text-red-600">{error}</p>
 
   return (
     <div className="space-y-6">
@@ -89,7 +114,7 @@ export default function DocumentosPage() {
                   <div>
                     <p className="font-medium text-slate-900">{doc.filename}</p>
                     <p className="text-xs text-slate-500">
-                      Subido el {doc.uploadedAt}
+                      Subido el {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleDateString('es-AR') : '—'}
                     </p>
                   </div>
                 </div>
@@ -114,6 +139,9 @@ export default function DocumentosPage() {
                 </div>
               </div>
             ))}
+            {documents.length === 0 && (
+              <p className="text-sm text-slate-500">Todavía no subiste documentos.</p>
+            )}
           </div>
 
           <div className="mt-6">

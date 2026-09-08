@@ -1,30 +1,22 @@
 'use client'
 
-
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { DataTable } from '@/components/ui/data-table'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
-type HistoryStatus = 'hired' | 'closed' | 'cancelled'
-
-interface HistoryItem {
+interface Solicitud {
   id: string
   title: string
-  date: string
-  closed: string
-  status: HistoryStatus
-  time: string
+  status: string | null
+  createdAt: string | null
+  updatedAt: string | null
 }
 
-const history: HistoryItem[] = [
-  { id: '1', title: 'Desarrollador Frontend', date: '01 Jul 2026', closed: '15 Jul 2026', status: 'hired', time: '14 días' },
-  { id: '2', title: 'Project Manager', date: '10 Jun 2026', closed: '28 Jun 2026', status: 'closed', time: '18 días' },
-  { id: '3', title: 'DevOps Engineer', date: '01 May 2026', closed: '20 May 2026', status: 'hired', time: '19 días' },
-  { id: '4', title: 'QA Tester', date: '15 Abr 2026', closed: '30 Abr 2026', status: 'cancelled', time: '15 días' },
-]
+const TERMINAL = new Set(['hired', 'closed', 'cancelled'])
 
-const statusColors: Record<HistoryStatus, string> = {
+const statusColors: Record<string, string> = {
   hired: 'bg-green-100 text-green-700',
   closed: 'bg-slate-100 text-slate-700',
   cancelled: 'bg-red-100 text-red-700',
@@ -32,26 +24,64 @@ const statusColors: Record<HistoryStatus, string> = {
 
 export default function HistorialPage() {
   const t = useTranslations('empresa.history')
+  const [history, setHistory] = useState<Solicitud[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  const statusLabels = {
+  const statusLabels: Record<string, string> = {
     hired: t('hired'),
     closed: t('closed'),
     cancelled: t('cancelled'),
   }
 
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/solicitudes')
+      .then((res) => {
+        if (!res.ok) throw new Error('No se pudo cargar el historial')
+        return res.json()
+      })
+      .then((data) => {
+        if (!cancelled) {
+          setHistory((data as Solicitud[]).filter((s) => TERMINAL.has(s.status ?? '')))
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const columns = [
     { key: 'title', header: t('position') },
-    { key: 'date', header: t('requestDate') },
-    { key: 'closed', header: t('closeDate') },
-    { key: 'time', header: t('time') },
+    {
+      key: 'createdAt',
+      header: t('requestDate'),
+      render: (item: Solicitud) => (item.createdAt ? new Date(item.createdAt).toLocaleDateString('es-AR') : '—'),
+    },
+    {
+      key: 'updatedAt',
+      header: t('closeDate'),
+      render: (item: Solicitud) => (item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('es-AR') : '—'),
+    },
     {
       key: 'status',
       header: t('status'),
-      render: (item: HistoryItem) => (
-        <Badge className={cn(statusColors[item.status])}>{statusLabels[item.status]}</Badge>
+      render: (item: Solicitud) => (
+        <Badge className={cn(statusColors[item.status ?? 'closed'])}>
+          {statusLabels[item.status ?? 'closed'] ?? item.status}
+        </Badge>
       ),
     },
   ]
+
+  if (loading) return <div className="animate-pulse h-32 bg-slate-100 rounded-lg" />
+  if (error) return <p className="text-sm text-red-600">{error}</p>
 
   return (
     <div className="space-y-6">
@@ -65,6 +95,9 @@ export default function HistorialPage() {
           columns={columns}
           searchPlaceholder="Buscar en historial..."
         />
+        {history.length === 0 && (
+          <p className="p-4 text-sm text-slate-500">Todavía no hay procesos cerrados.</p>
+        )}
       </div>
     </div>
   )

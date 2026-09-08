@@ -6,7 +6,7 @@ import {
   jobRequests,
   applications,
 } from '@/lib/db/schema'
-import { eq, count, desc } from 'drizzle-orm'
+import { eq, count, desc, inArray } from 'drizzle-orm'
 
 export async function GET() {
   const { userId, orgId } = await auth()
@@ -81,6 +81,7 @@ export async function GET() {
         value: count(),
       })
       .from(applications)
+      .where(inArray(applications.jobRequestId, recentRequestIds))
     // Group by jobRequestId
     for (const c of counts) {
       if (c.jobRequestId) {

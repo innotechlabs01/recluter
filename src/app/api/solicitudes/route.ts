@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { auth } from '@clerk/nextjs/server'
+import { resolveAuth } from '@/lib/test-auth'
 import { db } from '@/lib/db'
-import { jobRequests, jobRequestSteps, companies } from '@/lib/db/schema'
+import { jobRequests, jobRequestSteps, companies, processEvents } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
 
 // GET /api/solicitudes - Get all solicitudes for current company
 export async function GET() {
-  const { userId, orgId } = await auth()
+  const { userId, orgId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -27,7 +27,7 @@ export async function GET() {
 
 // POST /api/solicitudes - Create new solicitud
 export async function POST(req: Request) {
-  const { userId, orgId } = await auth()
+  const { userId, orgId } = await resolveAuth()
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -35,12 +35,25 @@ export async function POST(req: Request) {
 
   const body = await req.json()
 
-  // Resolve company ID from orgId
+  // Resolve company ID from orgId (E2E seed org: org_e2e_seed)
   let companyId = body.companyId
   if (orgId && !companyId) {
     const [company] = await db.select().from(companies).where(eq(companies.clerkOrgId, orgId))
     if (company) {
       companyId = company.id
+    }
+  }
+  // E2E fallback: ensure seed company exists so simulated auth can create jobs.
+  if (!companyId && userId?.startsWith('e2e-')) {
+    const [seed] = await db.select().from(companies).where(eq(companies.clerkOrgId, 'org_e2e_seed'))
+    if (seed) {
+      companyId = seed.id
+    } else {
+      const [created] = await db
+        .insert(companies)
+        .values({ clerkOrgId: 'org_e2e_seed', name: 'E2E Seed Co', contactEmail: 'e2e@recluter.test' })
+        .returning()
+      companyId = created.id
     }
   }
 
@@ -49,6 +62,10 @@ export async function POST(req: Request) {
   }
 
   // Insert job request
+  const deadline = body.deadline ? new Date(body.deadline) : body.selectionData?.deadline ? new Date(body.selectionData.deadline) : undefined
+  const startDate = body.startDate ? new Date(body.startDate) : body.positionData?.startDate ? new Date(body.positionData.startDate) : undefined
+  const validDeadline = deadline && !Number.isNaN(deadline.getTime()) ? deadline : undefined
+  const validStartDate = startDate && !Number.isNaN(startDate.getTime()) ? startDate : undefined
   const [solicitud] = await db.insert(jobRequests).values({
     companyId,
     title: body.positionTitle,
@@ -58,6 +75,12 @@ export async function POST(req: Request) {
     salaryMin: body.salaryMin?.toString(),
     salaryMax: body.salaryMax?.toString(),
     currency: body.currency,
+    deadline: validDeadline,
+    startDate: validStartDate,
+    isPublic: true,
+    publishedAt: new Date(),
+    expiresAt: validDeadline,
+    shareToken: crypto.randomUUID(),
   }).returning()
 
   // Insert wizard steps data
@@ -78,6 +101,13 @@ export async function POST(req: Request) {
       isComplete: true,
     })
   }
+
+  await db.insert(processEvents).values({
+    jobRequestId: solicitud.id,
+    eventType: 'created',
+    description: `Solicitud creada: ${solicitud.title}`,
+    actorId: userId,
+  })
 
   return NextResponse.json(solicitud, { status: 201 })
 }

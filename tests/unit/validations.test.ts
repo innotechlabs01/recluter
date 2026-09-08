@@ -110,6 +110,8 @@ test('contactSchema rejects empty name/email/message', () => {
 // ── Wizard per-step schemas ───────────────────────────────────────────────────
 
 test('solicitudSchema validates the complete wizard payload', () => {
+  const min = new Date()
+  min.setDate(min.getDate() + 30)
   const res = solicitudSchema.safeParse({
     companyName: 'Acme Corp',
     industry: 'Tech',
@@ -127,6 +129,7 @@ test('solicitudSchema validates the complete wizard payload', () => {
     englishLevel: 'advanced',
     technicalSkills: 'React, Node',
     candidatesCount: 5,
+    deadline: min.toISOString().slice(0, 10),
     interviewCount: 2,
   })
   assert.equal(res.success, true)
@@ -178,9 +181,24 @@ test('solicitud step 3 accepts valid profile fields', () => {
 })
 
 test('solicitud step 5 accepts valid selection fields', () => {
+  const min = new Date()
+  min.setDate(min.getDate() + 30)
+  const deadline = min.toISOString().slice(0, 10)
   const res = solicitudStepSchemas[5].safeParse({
     candidatesCount: 5,
+    deadline,
     interviewCount: 2,
   })
   assert.equal(res.success, true)
+})
+
+test('solicitud step 5 rejects deadline under 30 days', () => {
+  const soon = new Date()
+  soon.setDate(soon.getDate() + 7)
+  const res = solicitudStepSchemas[5].safeParse({
+    candidatesCount: 5,
+    deadline: soon.toISOString().slice(0, 10),
+    interviewCount: 2,
+  })
+  assert.equal(res.success, false)
 })

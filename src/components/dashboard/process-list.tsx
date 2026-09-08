@@ -35,15 +35,27 @@ interface ProcessItem {
 export function ProcessList() {
   const [processes, setProcesses] = useState<ProcessItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    let cancelled = false
     fetch('/api/solicitudes')
-      .then(res => res.json())
-      .then(data => {
-        setProcesses(data)
-        setLoading(false)
+      .then((res) => {
+        if (!res.ok) throw new Error('No se pudieron cargar los procesos')
+        return res.json()
       })
-      .catch(() => setLoading(false))
+      .then((data) => {
+        if (!cancelled) setProcesses(data)
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Error al cargar')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   if (loading) {
@@ -54,6 +66,10 @@ export function ProcessList() {
         ))}
       </div>
     )
+  }
+
+  if (error) {
+    return <p className="text-sm text-red-600">{error}</p>
   }
 
   if (processes.length === 0) {

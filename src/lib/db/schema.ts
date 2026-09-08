@@ -8,6 +8,7 @@ import {
   decimal,
   boolean,
   pgEnum,
+  unique,
 } from 'drizzle-orm/pg-core'
 
 // ── Enums ──────────────────────────────────────────────────────────────────────
@@ -97,6 +98,11 @@ export const jobRequests = pgTable('job_requests', {
   location: text('location'),
   startDate: timestamp('start_date'),
   deadline: timestamp('deadline'),
+  isPublic: boolean('is_public').default(false),
+  publishedAt: timestamp('published_at'),
+  expiresAt: timestamp('expires_at'),
+  shareToken: text('share_token').unique(),
+  assignedAt: timestamp('assigned_at'),
   additionalInfo: jsonb('additional_info'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
@@ -156,7 +162,9 @@ export const applications = pgTable('applications', {
   reviewedAt: timestamp('reviewed_at'),
   notes: text('notes'),
   createdAt: timestamp('created_at').defaultNow(),
-})
+}, (t) => [
+  unique('applications_job_candidate_unique').on(t.jobRequestId, t.candidateId),
+])
 
 // ── Process Events (timeline) ──────────────────────────────────────────────────
 
@@ -179,6 +187,7 @@ export const recruiters = pgTable('recruiters', {
   email: text('email').notNull(),
   specialties: jsonb('specialties'),
   isActive: boolean('is_active').default(true),
+  maxConcurrent: integer('max_concurrent').default(5),
   createdAt: timestamp('created_at').defaultNow(),
 })
 
@@ -242,6 +251,24 @@ export const systemConfig = pgTable('system_config', {
   value: jsonb('value'),
   description: text('description'),
   updatedAt: timestamp('updated_at').defaultNow(),
+})
+
+// ── Chat Threads / Messages (recruiter follow-up) ────────────────────────────
+
+export const chatThreads = pgTable('chat_threads', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  jobRequestId: uuid('job_request_id').references(() => jobRequests.id),
+  applicationId: uuid('application_id').references(() => applications.id),
+  createdAt: timestamp('created_at').defaultNow(),
+})
+
+export const chatMessages = pgTable('chat_messages', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  threadId: uuid('thread_id').references(() => chatThreads.id),
+  senderId: text('sender_id'),
+  senderRole: text('sender_role'),
+  body: text('body').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
 })
 
 // ── Testimonials ────────────────────────────────────────────────────────────────

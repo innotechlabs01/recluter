@@ -16,6 +16,18 @@ export default function RoleSelectionCards() {
     try {
       // Server Action: stores role in cookie + updates Clerk metadata
       await setUserRole(role)
+      // If the user came from a public job link, return there so the
+      // postulación stays attached (auto-applied + auto-rol candidato).
+      let pending: string | null = null
+      try {
+        pending = localStorage.getItem('pending_job_token')
+      } catch {
+        pending = null
+      }
+      if (role === 'candidate' && pending) {
+        window.location.href = `/empleos/${pending}`
+        return
+      }
       // Full page navigation — middleware reads the cookie and redirects correctly
       window.location.href = role === 'company' ? '/empresa/dashboard' : '/candidato/dashboard'
     } catch (err) {
