@@ -29,6 +29,13 @@
       "when": 1788525843877,
       "tag": "0003_zippy_colossus",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789443104740,
+      "tag": "0004_add_user_roles",
+      "breakpoints": true
     }
   ]
 }
