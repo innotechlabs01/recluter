@@ -8,6 +8,8 @@ import { checkDb } from './db'
  * reclutador moves stages → candidato sees status + applies to another
  * offer → admin sees postulaciones + tiempos.
  *
+ * Role assignment now goes through /onboarding (not /role-selection).
+ * In E2E bypass mode the middleware reads the user_role cookie directly.
  * DB-backed steps degrade gracefully when the DB is unreachable.
  */
 test.describe('full flow', () => {

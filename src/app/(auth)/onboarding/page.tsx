@@ -9,6 +9,11 @@ export const metadata = {
 }
 
 export default async function OnboardingPage() {
+  // E2E bypass: skip Clerk auth check
+  if (process.env.E2E_BYPASS_CLERK === '1') {
+    return <OnboardingCards />
+  }
+
   const { userId } = await auth()
   if (!userId) redirect('/sign-in')
 

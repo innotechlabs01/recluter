@@ -21,6 +21,44 @@ export async function setRoleCookie(page: Page, role: Role) {
   ])
 }
 
+/**
+ * Complete the onboarding flow by navigating to /onboarding, selecting a role
+ * card, filling the form, and submitting. In E2E bypass mode the server action
+ * sets the user_role cookie directly.
+ */
+export async function completeOnboarding(
+  page: Page,
+  role: 'company' | 'candidate',
+) {
+  await page.goto('/onboarding')
+
+  const cardText =
+    role === 'company' ? 'Soy empresa' : 'Busco oportunidades'
+  await page.getByText(cardText).click()
+
+  // Wait for the form page to load
+  await page.waitForURL(
+    role === 'company' ? /onboarding\/empresa/ : /onboarding\/candidato/,
+  )
+
+  if (role === 'company') {
+    await page.getByLabel(/nombre de la empresa/i).fill('Test Corp')
+    await page.getByLabel(/industria/i).fill('Tech')
+  } else {
+    await page.getByLabel(/nombre/i).fill('Test')
+    await page.getByLabel(/apellido/i).fill('Candidate')
+  }
+
+  await page
+    .getByRole('button', { name: /crear|completar/i })
+    .click()
+
+  // Wait for navigation to the dashboard after onboarding completes
+  await page.waitForURL(
+    role === 'company' ? /empresa\/dashboard/ : /candidato\/dashboard/,
+  )
+}
+
 export const test = base.extend<{ role: Role }>({
   role: ['company', { option: true }],
 })
