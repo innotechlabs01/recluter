@@ -48,14 +48,6 @@ export async function completeOnboarding(role: 'company' | 'candidate') {
     unsafeMetadata: { role },
   })
 
-  // Sync cookie for middleware (DB is primary, cookie is fallback for edge cases)
-  cookieStore.set('user_role', role, {
-    path: '/',
-    httpOnly: false,
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 365,
-  })
-
   // Invalidate cache
   invalidateRoleCache(userId)
 
