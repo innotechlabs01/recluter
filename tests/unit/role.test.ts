@@ -53,5 +53,5 @@ test('roleDashboardPath maps each role to its portal', () => {
   assert.equal(roleDashboardPath('candidate'), '/candidato/dashboard')
   assert.equal(roleDashboardPath('admin'), '/admin/dashboard')
   assert.equal(roleDashboardPath('recruiter'), '/reclutador/dashboard')
-  assert.equal(roleDashboardPath(null), '/role-selection')
+  assert.equal(roleDashboardPath(null), '/onboarding')
 })

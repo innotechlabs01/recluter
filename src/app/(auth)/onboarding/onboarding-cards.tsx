@@ -1,52 +1,23 @@
 'use client'
 
-import { useUser } from '@clerk/nextjs'
-import { useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Building2, Search } from 'lucide-react'
-import { setUserRole } from '@/app/actions/set-role'
+import { useRouter } from 'next/navigation'
 
-export default function RoleSelectionCards() {
-  const { isLoaded } = useUser()
-  const [loading, setLoading] = useState(false)
-
-  const selectRole = async (role: 'company' | 'candidate') => {
-    if (loading || !isLoaded) return
-    setLoading(true)
-    try {
-      // Server Action: stores role in cookie + updates Clerk metadata
-      await setUserRole(role)
-      // If the user came from a public job link, return there so the
-      // postulación stays attached (auto-applied + auto-rol candidato).
-      let pending: string | null = null
-      try {
-        pending = localStorage.getItem('pending_job_token')
-      } catch {
-        pending = null
-      }
-      if (role === 'candidate' && pending) {
-        window.location.href = `/empleos/${pending}`
-        return
-      }
-      // Full page navigation — middleware reads the cookie and redirects correctly
-      window.location.href = role === 'company' ? '/empresa/dashboard' : '/candidato/dashboard'
-    } catch (err) {
-      console.error('[RoleSelection] Error:', err)
-      setLoading(false)
-    }
-  }
+export default function OnboardingCards() {
+  const router = useRouter()
 
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-slate-900">Bienvenido a Recluter</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Completá tu registro</h1>
         <p className="text-slate-500 mt-2">¿Cómo querés usar la plataforma?</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4">
         <Card
-          className={`cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all group ${loading ? 'opacity-50 pointer-events-none' : ''}`}
-          onClick={() => selectRole('company')}
+          className="cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all group"
+          onClick={() => router.push('/onboarding/empresa')}
         >
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
@@ -57,7 +28,7 @@ export default function RoleSelectionCards() {
                 <h3 className="font-semibold text-slate-900 text-lg">Soy empresa</h3>
                 <p className="text-slate-500 mt-1">Necesito contratar personal para mi equipo</p>
                 <p className="text-sm text-blue-600 mt-3 font-medium">
-                  {loading ? 'Configurando...' : 'Crear solicitud de personal →'}
+                  Crear mi empresa →
                 </p>
               </div>
             </div>
@@ -65,8 +36,8 @@ export default function RoleSelectionCards() {
         </Card>
 
         <Card
-          className={`cursor-pointer hover:border-green-500 hover:shadow-lg transition-all group ${loading ? 'opacity-50 pointer-events-none' : ''}`}
-          onClick={() => selectRole('candidate')}
+          className="cursor-pointer hover:border-green-500 hover:shadow-lg transition-all group"
+          onClick={() => router.push('/onboarding/candidato')}
         >
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
@@ -77,7 +48,7 @@ export default function RoleSelectionCards() {
                 <h3 className="font-semibold text-slate-900 text-lg">Busco oportunidades laborales</h3>
                 <p className="text-slate-500 mt-1">Quiero encontrar trabajo en empresas de Estados Unidos</p>
                 <p className="text-sm text-green-600 mt-3 font-medium">
-                  {loading ? 'Configurando...' : 'Explorar oportunidades →'}
+                  Completar mi perfil →
                 </p>
               </div>
             </div>
