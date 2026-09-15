@@ -1,5 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import type { NextRequest } from 'next/server'
+import { getResolvedRole } from '@/lib/role-server'
 
 const isPublicRoute = createRouteMatcher([
   '/',
@@ -10,12 +11,12 @@ const isPublicRoute = createRouteMatcher([
   '/contacto(.*)',
   '/sign-in(.*)',
   '/sign-up(.*)',
-  '/role-selection(.*)',
+  '/onboarding(.*)',
   '/api/webhooks(.*)',
   '/api/jobs(.*)',
   '/api/testimonials(.*)',
   '/testimonio(.*)',
-  '/api/cron(.*)', // external scheduler — guarded by CRON_SECRET in the handler
+  '/api/cron(.*)',
   '/empleos(.*)',
 ])
 
@@ -25,55 +26,58 @@ const isCandidatoRoute = createRouteMatcher(['/candidato(.*)'])
 const isReclutadorRoute = createRouteMatcher(['/reclutador(.*)'])
 
 function handleRoleRedirect(req: NextRequest, role: string) {
-  // If user is on wrong portal, redirect to correct one
   if (isAdminRoute(req) && role !== 'admin') {
-    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'candidate' ? '/candidato/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/role-selection'
+    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'candidate' ? '/candidato/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/onboarding'
     return Response.redirect(new URL(redirectTo, req.url))
   }
-
   if (isEmpresaRoute(req) && role !== 'company') {
-    const redirectTo = role === 'admin' ? '/admin/dashboard' : role === 'candidate' ? '/candidato/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/role-selection'
+    const redirectTo = role === 'admin' ? '/admin/dashboard' : role === 'candidate' ? '/candidato/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/onboarding'
     return Response.redirect(new URL(redirectTo, req.url))
   }
-
   if (isCandidatoRoute(req) && role !== 'candidate') {
-    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'admin' ? '/admin/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/role-selection'
+    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'admin' ? '/admin/dashboard' : role === 'recruiter' ? '/reclutador/dashboard' : '/onboarding'
     return Response.redirect(new URL(redirectTo, req.url))
   }
-
   if (isReclutadorRoute(req) && role !== 'recruiter') {
-    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'candidate' ? '/candidato/dashboard' : '/role-selection'
+    const redirectTo = role === 'company' ? '/empresa/dashboard' : role === 'candidate' ? '/candidato/dashboard' : role === 'admin' ? '/admin/dashboard' : '/onboarding'
     return Response.redirect(new URL(redirectTo, req.url))
   }
 }
 
 export default clerkMiddleware(async (auth, req) => {
-  // Allow public routes
   if (isPublicRoute(req)) return
 
-  // Read role from cookie (JWT doesn't include unsafeMetadata by default in Clerk)
-  const role = req.cookies.get('user_role')?.value as string | undefined
-
-  // E2E bypass: simulated cookie auth (E2E_BYPASS_CLERK=1, test env only).
-  // Real Clerk sessions still go through protect() below.
-  if (process.env.E2E_BYPASS_CLERK === '1' && role) {
-    // Admin passthrough: admins can access any portal
+  // E2E bypass: simulated cookie auth
+  if (process.env.E2E_BYPASS_CLERK === '1') {
+    const role = req.cookies.get('user_role')?.value
     if (role === 'admin') return
-    return handleRoleRedirect(req, role)
+    if (role) return handleRoleRedirect(req, role)
+    // No role cookie in E2E → redirect to onboarding
+    if (isEmpresaRoute(req) || isAdminRoute(req) || isCandidatoRoute(req) || isReclutadorRoute(req)) {
+      return Response.redirect(new URL('/onboarding', req.url))
+    }
+    return
   }
 
   // Protect all other routes
   await auth.protect()
 
-  // Role-based redirect after auth
+  // Get userId from Clerk session
+  const { userId } = await auth()
+  if (!userId) {
+    return Response.redirect(new URL('/sign-in', req.url))
+  }
+
+  // Resolve role from DATABASE (not cookie)
+  const role = await getResolvedRole(userId)
+
   if (role) {
-    // Admin passthrough: admins can access any portal
     if (role === 'admin') return
     return handleRoleRedirect(req, role)
   } else {
-    // No role cookie set yet — redirect to role selection
+    // No role in DB → redirect to onboarding
     if (isEmpresaRoute(req) || isAdminRoute(req) || isCandidatoRoute(req) || isReclutadorRoute(req)) {
-      return Response.redirect(new URL('/role-selection', req.url))
+      return Response.redirect(new URL('/onboarding', req.url))
     }
   }
 })

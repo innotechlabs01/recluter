@@ -41,6 +41,6 @@ export function roleDashboardPath(role: Role | null): string {
     case 'recruiter':
       return '/reclutador/dashboard'
     default:
-      return '/role-selection'
+      return '/onboarding'
   }
 }
