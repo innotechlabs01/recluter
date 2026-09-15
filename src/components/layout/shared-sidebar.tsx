@@ -22,6 +22,7 @@ import {
   BriefcaseIcon,
   FolderOpen,
   MessageSquare,
+  ShieldCheck,
 } from 'lucide-react'
 
 interface SidebarProps {
@@ -57,6 +58,7 @@ const navigationConfig = {
       { name: 'Solicitudes', href: '/admin/solicitudes', icon: FileText },
       { name: 'Candidatos', href: '/admin/candidatos', icon: Users },
       { name: 'Reclutadores', href: '/admin/reclutadores', icon: UserSearch },
+      { name: 'Usuarios', href: '/admin/usuarios', icon: ShieldCheck },
       { name: 'Historial', href: '/admin/historial', icon: History },
       { name: 'Testimonios', href: '/admin/testimonios', icon: MessageSquare },
     ],
