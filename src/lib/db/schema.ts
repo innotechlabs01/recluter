@@ -64,6 +64,24 @@ export const workModeEnum = pgEnum('work_mode', [
   'onsite',
 ])
 
+export const userRoleStatusEnum = pgEnum('user_role_status', [
+  'pending',
+  'approved',
+  'rejected',
+])
+
+// ── User Roles (server-side role assignment) ──────────────────────────────────
+
+export const userRoles = pgTable('user_roles', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  clerkUserId: text('clerk_user_id').unique().notNull(),
+  role: text('role').notNull(),
+  status: userRoleStatusEnum('status').default('approved'),
+  assignedBy: text('assigned_by'),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+})
+
 // ── Companies (maps to Clerk Organization) ─────────────────────────────────────
 
 export const companies = pgTable('companies', {
