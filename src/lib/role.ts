@@ -1,6 +1,7 @@
 export type Role = 'company' | 'candidate' | 'admin' | 'recruiter'
 
-const VALID_ROLES = new Set<Role>(['company', 'candidate', 'admin', 'recruiter'])
+export const VALID_ROLES = ['company', 'candidate', 'admin', 'recruiter'] as const
+export const VALID_ROLES_SET = new Set<Role>(VALID_ROLES)
 
 export interface RoleUser {
   unsafeMetadata?: {
@@ -21,7 +22,7 @@ export function resolveRole(user: RoleUser | null | undefined): Role | null {
 
   const role = user.unsafeMetadata?.role
   if (typeof role !== 'string') return null
-  if (!VALID_ROLES.has(role as Role)) return null
+  if (!VALID_ROLES_SET.has(role as Role)) return null
 
   return role as Role
 }

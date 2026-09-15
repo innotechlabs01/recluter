@@ -1,23 +1,10 @@
 import { NextResponse } from 'next/server'
-import { resolveAuth } from '@/lib/test-auth'
-import { getResolvedRole, invalidateRoleCache } from '@/lib/role-server'
+import { requireAdmin } from '@/lib/admin-auth'
+import { invalidateRoleCache } from '@/lib/role-server'
+import { VALID_ROLES } from '@/lib/role'
 import { db } from '@/lib/db'
 import { userRoles } from '@/lib/db/schema'
 import { eq, desc } from 'drizzle-orm'
-
-const VALID_ROLES = ['company', 'candidate', 'admin', 'recruiter'] as const
-
-async function requireAdmin() {
-  const { userId } = await resolveAuth()
-  if (!userId) {
-    return { error: NextResponse.json({ error: 'Unauthorized' }, { status: 401 }) }
-  }
-  const role = await getResolvedRole(userId)
-  if (role !== 'admin') {
-    return { error: NextResponse.json({ error: 'Forbidden' }, { status: 403 }) }
-  }
-  return { userId }
-}
 
 // GET /api/admin/users — List all users with their roles
 export async function GET() {

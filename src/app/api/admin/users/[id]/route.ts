@@ -1,21 +1,10 @@
 import { NextResponse } from 'next/server'
-import { resolveAuth } from '@/lib/test-auth'
-import { getResolvedRole, invalidateRoleCache } from '@/lib/role-server'
+import { requireAdmin } from '@/lib/admin-auth'
+import { VALID_ROLES } from '@/lib/role'
+import { invalidateRoleCache } from '@/lib/role-server'
 import { db } from '@/lib/db'
 import { userRoles } from '@/lib/db/schema'
 import { eq } from 'drizzle-orm'
-
-async function requireAdmin() {
-  const { userId } = await resolveAuth()
-  if (!userId) {
-    return { error: NextResponse.json({ error: 'Unauthorized' }, { status: 401 }) }
-  }
-  const role = await getResolvedRole(userId)
-  if (role !== 'admin') {
-    return { error: NextResponse.json({ error: 'Forbidden' }, { status: 403 }) }
-  }
-  return { userId }
-}
 
 // DELETE /api/admin/users/[id] — Remove a user role
 export async function DELETE(
@@ -67,7 +56,7 @@ export async function PATCH(
 
   const updates: Record<string, unknown> = { updatedAt: new Date() }
 
-  if (body.role && ['company', 'candidate', 'admin', 'recruiter'].includes(body.role)) {
+  if (body.role && VALID_ROLES.includes(body.role)) {
     updates.role = body.role
   }
   if (body.status && ['pending', 'approved', 'rejected'].includes(body.status)) {
